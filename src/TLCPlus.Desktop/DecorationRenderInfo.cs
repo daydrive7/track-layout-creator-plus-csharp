@@ -3,8 +3,7 @@ using TLCPlus;
 
 namespace TLCPlus.Desktop;
 
-// Immutable metadata is indexed once. Idle decoration drawing must not scan
-// the complete rail catalogue for every item on every paint.
+// Cache catalogue lookups used on every decoration paint.
 internal static class DecorationRenderInfo
 {
     internal readonly record struct Rail(int Type,double Length);

@@ -4,8 +4,7 @@ using TLCPlus;
 namespace TLCPlus.Desktop;
 
 /// <summary>
-/// Independent preview of the original isoView camera, terrain grid, contours
-/// and track ribbon. The 2D editor's camera and project are never changed.
+/// Isometric terrain and track preview with a camera independent of the 2D editor.
 /// </summary>
 public sealed class IsometricForm : Form
 {

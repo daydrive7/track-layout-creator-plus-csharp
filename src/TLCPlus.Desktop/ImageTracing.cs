@@ -24,10 +24,8 @@ public static class ImageTracing
 
     readonly record struct Pixel(int X,int Y);
 
-    // These two modes follow imageTraceService.py in the original release:
-    // automatic luma threshold + four-neighbour dilation, Moore boundary
-    // walking or nearest-neighbour chaining, followed by the same geometry
-    // filters. The existing centerline skeleton path above is kept intact.
+    // Outline modes follow imageTraceService.py: luma threshold, four-neighbour
+    // dilation, then boundary walking or nearest-neighbour chaining.
     static List<Node> TraceAlternative(Bitmap source,double targetSize,string mode)
     {
         double factor=Math.Min(1,768.0/Math.Max(source.Width,source.Height));
@@ -71,8 +69,7 @@ public static class ImageTracing
     {
         (int X,int Y)[] directions=[(0,-1),(1,-1),(1,0),(1,1),(0,1),(-1,1),(-1,0),(-1,-1)];
         var path=new List<Pixel>{start};var current=start;int backtrack=6;
-        // The original caps this walk at 30,000 perimeter steps. The same
-        // bound also handles tiny or self-touching components safely.
+        // Bound the walk for self-touching components that may not return to the start.
         for(int iteration=0;iteration<30000;iteration++)
         {
             bool found=false;
@@ -91,8 +88,7 @@ public static class ImageTracing
 
     static List<Pixel> SmartFill(List<Pixel> ink)
     {
-        // Match the source's deterministic subsampling and nearest-neighbour
-        // order, including the swap/pop removal used to keep it inexpensive.
+        // Keep the source's subsampling and swap/pop order for deterministic results.
         int step=Math.Max(1,ink.Count/1500);
         var remaining=new List<Pixel>();
         for(int i=0;i<ink.Count;i+=step)remaining.Add(ink[i]);

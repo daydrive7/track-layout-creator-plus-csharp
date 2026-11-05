@@ -4,9 +4,7 @@ using TLCPlus;
 namespace TLCPlus.Desktop;
 
 /// <summary>
-/// Numeric node editor corresponding to v1.3.0 editPointProperties().
-/// Coordinate changes apply as an offset to a selection; the curve settings
-/// apply as absolute values, as they do in the Python application.
+/// Edits node coordinates as selection offsets and curve settings as absolute values.
 /// </summary>
 public sealed class NodePropertiesDialog : Form
 {
@@ -107,7 +105,7 @@ public sealed class NodePropertiesDialog : Form
         Close();
     }
 
-    /// <summary>Use after OK to reproduce the Python selection semantics.</summary>
+    /// <summary>Applies the accepted values to each selected node.</summary>
     public void ApplyTo(IEnumerable<Node> nodes)
     {
         double dx = Result.X - original.X;

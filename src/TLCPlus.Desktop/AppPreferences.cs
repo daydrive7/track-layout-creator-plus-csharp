@@ -23,12 +23,32 @@ public sealed class AppPreferences
     public static string FilePath=>Path.Combine(AppContext.BaseDirectory,"config.json");
     public static AppPreferences Load()
     {
-        AppPreferences result=new();try{if(File.Exists(FilePath))result=JsonSerializer.Deserialize<AppPreferences>(File.ReadAllText(FilePath))??new();}catch(JsonException){}catch(IOException){}catch(UnauthorizedAccessException){}
-        result.Theme=result.Theme=="Classic"?"Classic":"Dark";
-        try{if(result.Accent.Length!=7||result.Accent[0]!='#')throw new FormatException();ColorTranslator.FromHtml(result.Accent);}catch{result.Accent="#0A84FF";}
-        result.TraceAccuracy=Math.Clamp(result.TraceAccuracy,50,100);return result;
+        AppPreferences result = new();
+        try
+        {
+            if (File.Exists(FilePath))
+                result = JsonSerializer.Deserialize<AppPreferences>(File.ReadAllText(FilePath)) ?? new();
+        }
+        catch (Exception error) when (error is JsonException or IOException or UnauthorizedAccessException)
+        {
+            // Use defaults if the saved preferences cannot be read.
+        }
+
+        result.Theme = result.Theme == "Classic" ? "Classic" : "Dark";
+        if (result.Accent is not { Length: 7 } || result.Accent[0] != '#' ||
+            !int.TryParse(result.Accent.AsSpan(1), System.Globalization.NumberStyles.AllowHexSpecifier,
+                System.Globalization.CultureInfo.InvariantCulture, out _))
+            result.Accent = "#0A84FF";
+        result.TraceAccuracy = Math.Clamp(result.TraceAccuracy, 50, 100);
+        return result;
     }
-    public void Save(){string temporary=FilePath+".tmp";File.WriteAllText(temporary,JsonSerializer.Serialize(this,new JsonSerializerOptions{WriteIndented=true}));File.Move(temporary,FilePath,true);}
+
+    public void Save()
+    {
+        string temporary = FilePath + ".tmp";
+        File.WriteAllText(temporary, JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true }));
+        File.Move(temporary, FilePath, true);
+    }
 }
 /// <summary>Live palette shared by native controls and renderers.</summary>
 public static class UiTheme

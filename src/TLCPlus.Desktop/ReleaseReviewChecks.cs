@@ -12,6 +12,8 @@ static class ReleaseReviewChecks
     }
     public static void Run(MainForm form,string root,List<string> checks)
     {
+        CheckPreferences();
+        checks.Add("Preferences tolerate malformed JSON, null/invalid accents and clamp tracing accuracy");
         var menu=form.MainMenuStrip!;var last=menu.Items[^1];var blank=new Point(last.Bounds.Right+3,menu.Height/2);
         if(!form.IsMenuDragPoint(blank)||form.IsMenuDragPoint(new Point(last.Bounds.Left+5,last.Bounds.Top+5)))throw new Exception("Unused area beside update menu is not distinguished from menu actions");
         if(form.Controls.Cast<Control>().SelectMany(c=>c.Controls.Cast<Control>()).OfType<Label>().Any(c=>c.Text=="TLC+ C# 1.0.0"))throw new Exception("Centered title remains in the bar");
@@ -45,6 +47,30 @@ static class ReleaseReviewChecks
         }finally{
             (preferences.Theme,preferences.Accent,preferences.CanvasColor,preferences.PanelColor,preferences.ShowTitle)=original;
             typeof(MainForm).GetMethod("ChangeLanguage",Private)!.Invoke(form,["en"]);typeof(MainForm).GetMethod("ApplyPreferences",Private)!.Invoke(form,null);form.Project.Settings.Scenery=scene;form.Commit();
+        }
+    }
+
+    static void CheckPreferences()
+    {
+        string? original=File.Exists(AppPreferences.FilePath)?File.ReadAllText(AppPreferences.FilePath):null;
+        try
+        {
+            foreach(string json in new[]{"{","null","{\"accent_color\":null}","{\"accent_color\":\"#GGGGGG\"}"})
+            {
+                File.WriteAllText(AppPreferences.FilePath,json);
+                if(AppPreferences.Load().Accent!="#0A84FF")throw new Exception("Invalid preferences did not use the default accent");
+            }
+            File.WriteAllText(AppPreferences.FilePath,"{\"accent_color\":\"#30D158\",\"theme\":\"Classic\",\"trace_accuracy\":999}");
+            var preferences=AppPreferences.Load();
+            if(preferences.Accent!="#30D158"||preferences.Theme!="Classic"||preferences.TraceAccuracy!=100)
+                throw new Exception("Valid preferences or upper accuracy limit were not retained");
+            File.WriteAllText(AppPreferences.FilePath,"{\"trace_accuracy\":-1}");
+            if(AppPreferences.Load().TraceAccuracy!=50)throw new Exception("Lower accuracy limit was not applied");
+        }
+        finally
+        {
+            if(original==null)File.Delete(AppPreferences.FilePath);
+            else File.WriteAllText(AppPreferences.FilePath,original);
         }
     }
 }

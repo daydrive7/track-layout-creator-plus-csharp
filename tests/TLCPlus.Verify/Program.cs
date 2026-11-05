@@ -1,14 +1,17 @@
 using TLCPlus;
 using System.Text.Json;
 using System.Security.Cryptography;
-string root=args.Length>0?Path.GetFullPath(args[0]):@"D:\TLCPlus-CSharp";
+string root=Path.GetFullPath(args.Length>0?args[0]:Environment.CurrentDirectory);
 Directory.CreateDirectory(Path.Combine(root,"analysis"));
 Terrain.AssetsPath=Path.Combine(root,"src/TLCPlus.Core/Assets");
 string fixtures=Path.Combine(root,"tests/fixtures");
 int pass=0,failed=0,roundtrips=0;var results=new List<object>();
 // The date occupies an unsigned 32-bit word; dates from 2002 set its sign bit.
 if((Exporter.PackedDate(new DateTime(2026,11,4,21,30,15))>>26)!=56)throw new Exception("Current-year timestamp packing failed");
-foreach(string path in Directory.GetFiles(fixtures,"*.trk5").Order()){
+var fixturePaths=Directory.GetFiles(fixtures,"*.trk5").Order().ToArray();
+if(fixturePaths.Length==0)throw new InvalidDataException("No TRK5 fixtures found. Run from the repository root or pass its path.");
+CheckLayoutMetadata(root,fixturePaths[0]);
+foreach(string path in fixturePaths){
     string name=Path.GetFileNameWithoutExtension(path);
     try{
         byte[] raw=File.ReadAllBytes(path);var p=TrkFormat.Read(raw);byte[] saved=TrkFormat.Write(p);
@@ -32,3 +35,35 @@ foreach(var bad in new[]{new byte[0],new byte[155],"BAD!"u8.ToArray()}){try{TedD
 var report=new{referenceVersion="1.3.0",passed=pass,failed,roundtrips,timestamp="E245A123",results};
 File.WriteAllText(Path.Combine(root,"analysis/compatibility-results.json"),JsonSerializer.Serialize(report,new JsonSerializerOptions{WriteIndented=true}));
 Console.WriteLine($"{pass} byte-identical TED exports; {roundtrips} exact roundtrips; {failed} failures");return failed==0?0:1;
+
+static void CheckLayoutMetadata(string root,string fixture)
+{
+    string folder=Path.Combine(root,"work","metadata-checks");
+    Directory.CreateDirectory(folder);
+    string path=Path.Combine(folder,"layout.trk5"),companion=path+".tlcplus.json";
+    var project=TrkFormat.Read(File.ReadAllBytes(fixture));
+    project.Settings.ManualHeight=true;
+    project.Settings.ManualHeightIn=2;
+    project.Decorations.Add(new(){Uuid=123,Type=1,Vpos=25});
+    DocumentFiles.SaveLayout(path,project);
+    string saved=File.ReadAllText(companion);
+    var loaded=DocumentFiles.LoadLayout(path);
+    if(!loaded.Settings.ManualHeight||loaded.Settings.ManualHeightIn!=2||loaded.Decorations.Count!=1)
+        throw new Exception("Layout companion roundtrip failed");
+
+    var metadata=System.Text.Json.Nodes.JsonNode.Parse(saved)!;
+    metadata["Decorations"]=null;
+    File.WriteAllText(companion,metadata.ToJsonString());
+    loaded=DocumentFiles.LoadLayout(path);
+    if(loaded.Decorations==null||loaded.Decorations.Count!=0||!loaded.Settings.ManualHeight)
+        throw new Exception("Null companion decorations were not handled");
+
+    foreach(string invalid in new[]{"{","null",saved.Replace("\"Version\": 1","\"Version\": 2"),saved.Replace("\"TrkSha256\": \"","\"TrkSha256\": \"stale-")})
+    {
+        File.WriteAllText(companion,invalid);
+        loaded=DocumentFiles.LoadLayout(path);
+        if(loaded.Settings.ManualHeight||loaded.Decorations.Count!=0)
+            throw new Exception("Invalid or stale companion metadata was applied");
+    }
+    Console.WriteLine("PASS layout companion roundtrip, null decorations, malformed JSON, version and checksum checks");
+}
