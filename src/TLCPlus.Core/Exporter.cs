@@ -10,7 +10,7 @@ public class Course
     public List<DecoEntry> Decorations=[];
     public int Corners;
     public double PlanLength,Length;
-    // Preview positions remain in plan-view metres, as in the Python canvas.
+    // Positions in plan-view metres, before elevation changes the road length.
     public double Start2d,Finish2d,PitStart2d,PitLength;
     public bool HasLinePositions;
 }
@@ -46,8 +46,7 @@ public static class Exporter
         c.Roads=Roads(p,c);c.Decorations=Decorations(p,c);
         SetLinePositions(p,c);return c;
     }
-    // Same plan-view road/start/pit positions as a full build, without terrain
-    // sampling, height smoothing, banking or decoration export during a drag.
+    // Skip elevation, banking and decorations while dragging; retain road and line positions.
     public static Course BuildPlanPreview(Project p)
     {
         var c=new Course{Points=Geometry.ControlPoints(p),Corners=p.Settings.Circuit?p.Nodes.Count:p.Nodes.Count-2};

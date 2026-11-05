@@ -2,8 +2,7 @@ using System.Drawing.Drawing2D;
 using TLCPlus;
 namespace TLCPlus.Desktop;
 
-// The Python navigator shows relative terrain elevation and slope; it does
-// not directly graph the absolute, camber-adjusted TED height table.
+// Display terrain-relative elevation and slope, before TED camber adjustments.
 public class ElevationView:Control
 {
     public Course? Course;
@@ -33,7 +32,7 @@ public class ElevationView:Control
         else
         {
             distances=new double[c.Heights.Count];heights=c.Heights.Select(z=>z-offset).ToArray();
-            // Each bank has its own division count. Sample index/N distorts X.
+            // Bank division counts vary, so sample indices are not evenly spaced in distance.
             foreach(var bank in c.Banks)for(int i=0;i<=bank.Div;i++){int index=bank.Index+i;if(index<distances.Length)distances[index]=bank.Pos2d+bank.Len2d*i/Math.Max(1,bank.Div);}
             if(c.Banks.Count==0)for(int i=0;i<distances.Length;i++)distances[i]=total*i/Math.Max(1,distances.Length-1);
         }

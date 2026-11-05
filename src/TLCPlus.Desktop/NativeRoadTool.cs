@@ -41,7 +41,7 @@ public partial class MainForm
             if(roadTypeChoice.SelectedItem is not RoadType tedType)return;
             if(tedType.Segments.Count!=1)throw new InvalidOperationException("Import the TED path as a layout to place a complete multi-part road chain.");
             double d=Exporter.To3d(Ted.Course.Banks,distance);int index=Ted.Course.Roads.FindIndex(r=>d>=r.Begin&&d<(r.End==0?Ted.Course.Length:r.End));if(index<0)return;
-            var edited=TedDocument.Read(Ted.Write());edited.SetRoadType(index,tedType.Segments[0].Uuid,flipRoadType?1:0);Ted=edited;Commit();status.Text=tedType.Name+" — "+UiLanguage.T("TED road section updated");return;
+            var edited=TedDocument.Read(Ted.Write());edited.SetRoadType(index,tedType.Segments[0].Uuid,flipRoadType?1-Ted.Course.Roads[index].Flag:(int?)null);Ted=edited;Commit();status.Text=tedType.Name+" — "+UiLanguage.T("TED road section updated");return;
         }
         if(erase){int index=Project.RoadPlacements.FindLastIndex(p=>p.Scenery==Project.Settings.Scenery&&distance>=p.Start&&distance<=p.Start+(RoadTypeCatalog.ForScenery(p.Scenery).FirstOrDefault(t=>t.Id==p.TypeId)?.TotalLength??0));if(index>=0){Project.RoadPlacements.RemoveAt(index);Commit();}return;}
         if(roadTypeChoice.SelectedItem is not RoadType type||Preview==null)return;

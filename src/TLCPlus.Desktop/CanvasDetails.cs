@@ -50,8 +50,7 @@ public partial class TrackCanvas
             var after=Geometry.At(course.Points,Math.Min(course.PlanLength,distance+1)).Point;
             double fx=after.X-before.X,fy=after.Y-before.Y,norm=Math.Sqrt(fx*fx+fy*fy);
             if(norm==0)return;fx/=norm;fy/=norm;
-            // Exact Python screen-space left normal, with local tangent sampled
-            // at +/-1 m rather than inferred from a different curve's angle.
+            // Screen-space left normal from the tangent sampled one metre either side.
             double lx=fy,ly=-fx,halfRoad=Project.Settings.RoadWidth*.5,side=right?-1:1;
             double factor=track switch{"CURB"=>.5,"A"=>.75,"B"=>2.2,_=>1.35};
             bool gate=type is 12 or 18;

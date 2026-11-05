@@ -45,7 +45,7 @@ public partial class TrackCanvas:Control
             using var nodeFont=new Font("Segoe UI",LabelFontSize);
             for(int i=0;i<nodePoints.Length;i++){
                 var p=nodePoints[i];bool selected=Selected.Contains(i);var color=selected?Color.FromArgb(255,183,78):UiTheme.AccentLight;
-                // Original Python markers span x/y +/- 2 with a one-pixel outline.
+                // Four-pixel markers with a one-pixel outline.
                 var smoothing=g.SmoothingMode;g.SmoothingMode=SmoothingMode.None;
                 using(var brush=new SolidBrush(color))g.FillRectangle(brush,p.X-2,p.Y-2,4,4);
                 using(var border=new Pen(color,1))g.DrawRectangle(border,p.X-2,p.Y-2,4,4);

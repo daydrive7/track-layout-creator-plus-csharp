@@ -5,9 +5,7 @@ using TLCPlus;
 namespace TLCPlus.Desktop;
 
 /// <summary>
-/// Native drawing of TLC+ v1.3.0's original drawDecoSymbol artwork. The static
-/// asset contains the original paths and colours, evaluated once at radius 100.
-/// No Python, Tk or external image provider is used by the application.
+/// Renders the original drawDecoSymbol paths, stored at radius 100 in the artwork asset.
 /// </summary>
 public static class DecorationArtwork
 {
@@ -157,8 +155,7 @@ public static class DecorationArtwork
             if(closed)path.AddPolygon(points);else path.AddLines(points);
             return path;
         }
-        // Tk smooth paths are quadratic B-splines. Convert each quadratic span
-        // to an equivalent cubic Bezier rather than inventing replacement art.
+        // Tk smooth paths use quadratic B-splines; GDI+ needs cubic Bezier spans.
         PointF Mid(PointF a,PointF b)=>new((a.X+b.X)*.5f,(a.Y+b.Y)*.5f);
         PointF Blend(PointF a,PointF b,float f)=>new(a.X+(b.X-a.X)*f,a.Y+(b.Y-a.Y)*f);
         if(closed)
