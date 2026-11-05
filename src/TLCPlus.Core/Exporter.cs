@@ -84,7 +84,7 @@ public static class Exporter
             if(split== -999&&target!= -1){var r=raw[target];raw[target]=(r.Id,r.Flag,remainder);raw.Insert(target+1,(r.Id,r.Flag,r.Len-remainder));split=target+1;}raw=raw.Skip(split).Concat(raw.Take(split)).ToList();
         }
         raw=raw.Where(r=>r.Len>.1).ToList();var roads=new List<Road>();double pos=0;for(int i=0;i<raw.Count;i++){var r=raw[i];double begin=pos;pos+=r.Len;if(i==raw.Count-1&&Abs(pos-length)<.01)pos=length;roads.Add(new(r.Id,r.Flag,To3d(c.Banks,begin),To3d(c.Banks,pos)));}
-        if(s.Circuit&&roads.Count>0)roads[^1]=roads[^1] with{End=0};return roads;
+        if(s.Circuit&&roads.Count>0)roads[^1]=roads[^1] with{End=0};return RoadPlacementEngine.Apply(p,c,roads);
     }
     static List<DecoEntry> Decorations(Project p,Course c)
     {

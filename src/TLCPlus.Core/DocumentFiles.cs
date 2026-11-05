@@ -15,13 +15,14 @@ public static class DocumentFiles
         public bool ManualHeightEase {get;set;}=true;
         public double SmoothMix {get;set;}=1;
         public List<Decoration> Decorations {get;set;}=[];
+        public List<RoadPlacement> RoadPlacements {get;set;}=[];
     }
     public static void SaveLayout(string path,Project project)
     {
         byte[] bytes=TrkFormat.Write(project);File.WriteAllBytes(path,bytes);
-        var s=project.Settings;var metadata=new Metadata{TrkSha256=Convert.ToHexString(SHA256.HashData(bytes)),ManualHeight=s.ManualHeight,ManualHeightIn=s.ManualHeightIn,ManualHeightOut=s.ManualHeightOut,ManualHeightEase=s.ManualHeightEase,SmoothMix=s.SmoothMix,Decorations=project.Decorations};
+        var s=project.Settings;var metadata=new Metadata{TrkSha256=Convert.ToHexString(SHA256.HashData(bytes)),ManualHeight=s.ManualHeight,ManualHeightIn=s.ManualHeightIn,ManualHeightOut=s.ManualHeightOut,ManualHeightEase=s.ManualHeightEase,SmoothMix=s.SmoothMix,Decorations=project.Decorations,RoadPlacements=project.RoadPlacements};
         string extra=path+".tlcplus.json";
-        if(project.Decorations.Count>0||s.ManualHeight||s.ManualHeightIn!=1||s.ManualHeightOut!=1||!s.ManualHeightEase||s.SmoothMix!=1||File.Exists(extra))File.WriteAllText(extra,JsonSerializer.Serialize(metadata,new JsonSerializerOptions{WriteIndented=true}));
+        if(project.Decorations.Count>0||project.RoadPlacements.Count>0||s.ManualHeight||s.ManualHeightIn!=1||s.ManualHeightOut!=1||!s.ManualHeightEase||s.SmoothMix!=1||File.Exists(extra))File.WriteAllText(extra,JsonSerializer.Serialize(metadata,new JsonSerializerOptions{WriteIndented=true}));
     }
     public static Project LoadLayout(string path)
     {
@@ -30,7 +31,7 @@ public static class DocumentFiles
         try{
             var metadata=JsonSerializer.Deserialize<Metadata>(File.ReadAllText(extra));
             if(metadata==null||metadata.Version!=1||metadata.TrkSha256!=Convert.ToHexString(SHA256.HashData(bytes)))return project;
-            var s=project.Settings;s.ManualHeight=metadata.ManualHeight;s.ManualHeightIn=metadata.ManualHeightIn;s.ManualHeightOut=metadata.ManualHeightOut;s.ManualHeightEase=metadata.ManualHeightEase;s.SmoothMix=metadata.SmoothMix;project.Decorations=metadata.Decorations;
+            var s=project.Settings;s.ManualHeight=metadata.ManualHeight;s.ManualHeightIn=metadata.ManualHeightIn;s.ManualHeightOut=metadata.ManualHeightOut;s.ManualHeightEase=metadata.ManualHeightEase;s.SmoothMix=metadata.SmoothMix;project.Decorations=metadata.Decorations;project.RoadPlacements=metadata.RoadPlacements??[];
         }catch(JsonException){}
         return project;
     }

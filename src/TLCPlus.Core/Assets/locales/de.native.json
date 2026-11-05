@@ -32,5 +32,12 @@
   "C# edition": "C#-Version",
   "TLC — created by eran0004": "TLC — entwickelt von eran0004",
   "TLC+ (Python and C#) — created by daydrive7": "TLC+ (Python und C#) — entwickelt von daydrive7",
-  "TLC+ (Python, C#, and Web) — created by daydrive7": "TLC+ (Python, C# und Web) — entwickelt von daydrive7"
+  "TLC+ (Python, C#, and Web) — created by daydrive7": "TLC+ (Python, C# und Web) — entwickelt von daydrive7",
+  "ROAD TYPES": "STRASSENTYPEN",
+  "Place road type": "Straßentyp platzieren",
+  "Remove road type": "Straßentyp entfernen",
+  "Clear road types": "Straßentypen löschen",
+  "Flip road orientation": "Straßenausrichtung umkehren",
+  "Restaurant / parking road": "Restaurant-/Parkplatzstraße",
+  "Normal road": "Normale Straße"
 }

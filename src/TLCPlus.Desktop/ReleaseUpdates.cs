@@ -3,7 +3,7 @@ using System.Text.Json;
 namespace TLCPlus.Desktop;
 public static class ReleaseUpdates
 {
-    public const string Version="1.0.0", PythonVersion="1.3.0";
+    public const string Version="1.0.1", PythonVersion="1.3.0";
     public const string Repository="daydrive7/track-layout-creator-plus-csharp";
     public record Result(bool Newer,string Tag,string? Url,string Message);
     public static async Task<Result> Check(HttpClient? supplied=null)

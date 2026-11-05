@@ -25,6 +25,8 @@ foreach(string path in Directory.GetFiles(fixtures,"*.trk5").Order()){
         results.Add(new{name,identical=equal,trk5Sha256=Convert.ToHexStringLower(SHA256.HashData(saved)),tedSha256=Convert.ToHexStringLower(SHA256.HashData(actual))});
     }catch(Exception e){failed++;Console.WriteLine($"FAIL {name}: {e}");}
 }
+RoadTests.Run(root);
+RoadPlacementTests.Run(root);
 // Real user files exercise preservation of older/unknown TED table bytes.
 string corpus=Path.Combine(root,"tests/corpus");if(Directory.Exists(corpus))foreach(string path in Directory.GetFiles(corpus)){try{byte[] raw=File.ReadAllBytes(path);byte[] output=Path.GetExtension(path).Equals(".ted",StringComparison.OrdinalIgnoreCase)?TedDocument.Read(raw).Write():TrkFormat.Write(TrkFormat.Read(raw));if(!raw.AsSpan().SequenceEqual(output))throw new Exception("Preservation differs");roundtrips++;}catch(Exception e){failed++;Console.WriteLine($"CORPUS FAIL {Path.GetFileName(path)}: {e.Message}");}}
 // Rejected malformed inputs must fail before allocating or exporting.

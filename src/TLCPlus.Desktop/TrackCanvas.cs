@@ -37,7 +37,7 @@ public partial class TrackCanvas:Control
         if(ShowReference&&ReferenceCourse is {Points.Count:>1} reference){var rp=new List<PointF>();for(double d=0;d<reference.PlanLength;d+=Math.Max(5,4/Zoom))rp.Add(Screen(Geometry.At(reference.Points,d).Point*ReferenceScale));if(rp.Count>1){using var pen=new Pen(Color.FromArgb(150,100,160,100),2);g.DrawLines(pen,rp.ToArray());}}
         if(ShowGrid&&!Isometric)DrawGrid(g);
         if(Course is{Points.Count:>1} c&&ShowTrack){var path=new List<PointF>();sampledDistances=[];double distance=0;for(int i=1;i<c.Points.Count;i++){var cp=c.Points[i];int divisions=Math.Clamp((int)(cp.Length*Zoom/5)+1,1,500);for(int j=i==1?0:1;j<=divisions;j++){double f=(double)j/divisions;Vec xy=cp.Form is 0 or 3?c.Points[i-1].XY+(cp.XY-c.Points[i-1].XY)*f:Geometry.Interpolate(cp.Center,cp.Radius,cp.StartAngle,cp.SweepAngle,f);double d=distance+cp.Length*f,z=0;if(Isometric&&c.Heights.Count>0){int h=(int)(d/Math.Max(c.PlanLength,1)*(c.Heights.Count-1));z=c.Heights[Math.Clamp(h,0,c.Heights.Count-1)];}path.Add(Screen(xy,z));sampledDistances.Add(d);}distance+=cp.Length;}
-            sampledPath=path;DrawRoad(g,c,path);
+            sampledPath=path;DrawRoad(g,c,path);DrawRoadPlacements(g,c);
         }
         if(Course is {Points.Count:>1} dc)DrawDecorations(g,dc);
         var nodePoints=Project.Nodes.Select(n=>Screen(n.XY,Isometric?n.Z:0)).ToArray();if(nodePoints.Length>1&&!Isometric&&ShowPolygon){using var pen=new Pen(UiTheme.Polygon,1);g.DrawLines(pen,nodePoints);if(Project.Settings.Circuit)g.DrawLine(pen,nodePoints[^1],nodePoints[0]);}
@@ -72,6 +72,7 @@ public partial class TrackCanvas:Control
     protected override void OnMouseDown(MouseEventArgs e)
     {
         base.OnMouseDown(e);Focus();last=e.Location;dragChanged=false;if(e.Button==MouseButtons.Middle){panning=true;Capture=true;return;}if(Isometric)return;
+        if(Tool is "road" or "road-erase"){if(e.Button is MouseButtons.Left or MouseButtons.Right){var nearest=NearestTrack(e.Location);if(nearest.Pixels<=35)RoadClicked?.Invoke(nearest.Distance,e.Button==MouseButtons.Right||Tool=="road-erase");}return;}
         if(e.Button==MouseButtons.Right){
             if(Tool=="decorate"){int hit=HitDecoration(e.Location);if(hit>=0){EditStarted?.Invoke();Project.Decorations.RemoveAt(hit);selectedDecoration=-1;DecorationSelected?.Invoke(-1);Edited?.Invoke();EditFinished?.Invoke();}return;}
             int rightHit=Hit(e.Location);if(rightHit>=0){if(!Selected.Contains(rightHit))Selected=[rightHit];SelectionChanged?.Invoke();radiusDragging=Tool!="camber";camberDragging=Tool=="camber";EditStarted?.Invoke();Capture=true;}else{panning=true;Capture=true;}return;

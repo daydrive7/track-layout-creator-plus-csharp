@@ -1,6 +1,16 @@
 name: Publish verified release
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        required: true
+        description: Native version, without v
+      build_run:
+        required: true
+        description: Successful Windows build run ID
+      source_sha:
+        required: true
+        description: Exact verified source commit
 permissions:
   contents: write
   actions: read
@@ -10,50 +20,65 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       GH_REPO: ${{ github.repository }}
+      VERSION: ${{ inputs.version }}
+      BUILD_RUN: ${{ inputs.build_run }}
+      SOURCE_SHA: ${{ inputs.source_sha }}
     steps:
       - uses: actions/checkout@v4
-      - name: Check verified build and draft
+        with:
+          ref: ${{ inputs.source_sha }}
+      - name: Check verified build and prepare draft
         shell: bash
         run: |
           set -euo pipefail
-          test "$(gh api repos/$GH_REPO/actions/runs/42084246779 --jq .conclusion)" = success
-          test "$(gh api repos/$GH_REPO/actions/runs/42084246779 --jq .head_sha)" = e720153a80e56fb8a62fdd8f94b7a6b784ce92fa
-          test "$(gh api repos/$GH_REPO/releases/435568004 --jq .draft)" = true
-          gh run download 42084246779 --name TLCPlus-CSharp-win-x64 --dir portable
+          [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          [[ "$SOURCE_SHA" =~ ^[a-f0-9]{40}$ ]]
+          [[ "$BUILD_RUN" =~ ^[0-9]+$ ]]
+          test "$(gh api repos/$GH_REPO/actions/runs/$BUILD_RUN --jq .conclusion)" = success
+          test "$(gh api repos/$GH_REPO/actions/runs/$BUILD_RUN --jq .head_sha)" = "$SOURCE_SHA"
+          gh run download "$BUILD_RUN" --name TLCPlus-CSharp-win-x64 --dir portable
           mkdir assets
-          gh release download v1.0.0 --pattern TLCPlus-CSharp-v1.0.0-source.zip --dir assets
+          if ! gh release view "v$VERSION" >/dev/null 2>&1; then
+            gh release create "v$VERSION" --draft --target "$SOURCE_SHA" --title "TLC+ C# v$VERSION" --notes-file RELEASE_NOTES.md
+          fi
+          gh api "repos/$GH_REPO/releases/tags/v$VERSION" > release.json
+          test "$(jq -r .draft release.json)" = true
+          test "$(jq -r .target_commitish release.json)" = "$SOURCE_SHA"
+          gh api "repos/$GH_REPO/zipball/$SOURCE_SHA" > source.zip
       - name: Package and hash
         shell: python
         run: |
           from pathlib import Path
-          import zipfile,shutil,hashlib
-          root=Path('portable');out=Path('assets')
-          exe=next(root.rglob('TLCPlus.exe'));root=exe.parent
+          import zipfile,shutil,hashlib,os
+          version=os.environ['VERSION'];prefix='TLCPlus-CSharp-v'+version
+          root=next(Path('portable').rglob('TLCPlus.exe')).parent;out=Path('assets')
           assert (root/'Assets/locales/en.json').exists()
-          shutil.copyfile(exe,out/'TLCPlus.exe')
-          with zipfile.ZipFile(out/'TLCPlus-CSharp-v1.0.0-win-x64.zip','w',zipfile.ZIP_DEFLATED,compresslevel=5) as z:
+          for name in ['README.md','LICENSE','CONTRIBUTORS.md']:shutil.copyfile(name,root/name)
+          shutil.copyfile(root/'TLCPlus.exe',out/'TLCPlus.exe')
+          with zipfile.ZipFile(out/(prefix+'-win-x64.zip'),'w',zipfile.ZIP_DEFLATED,compresslevel=5) as z:
               for p in root.rglob('*'):
                   if p.is_file() and p.name!='config.json' and p.suffix!='.pdb':z.write(p,Path('TLCPlus-CSharp')/p.relative_to(root))
-          with zipfile.ZipFile(out/'TLCPlus-CSharp-v1.0.0-assets.zip','w',zipfile.ZIP_DEFLATED,compresslevel=5) as z:
+          with zipfile.ZipFile(out/(prefix+'-assets.zip'),'w',zipfile.ZIP_DEFLATED,compresslevel=5) as z:
               for p in (root/'Assets').rglob('*'):
                   if p.is_file():z.write(p,p.relative_to(root))
-          files=sorted(p for p in out.iterdir() if p.suffix in ['.exe','.zip'])
-          (out/'SHA256SUMS.txt').write_text(''.join(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.name+'\n' for p in files))
-      - name: Upload and verify release files
+          with zipfile.ZipFile('source.zip') as original,zipfile.ZipFile(out/(prefix+'-source.zip'),'w',zipfile.ZIP_DEFLATED,compresslevel=5) as z:
+              for item in original.infolist():
+                  if not item.is_dir():z.writestr('TLCPlus-CSharp-source/'+item.filename.split('/',1)[1],original.read(item))
+          files=sorted(out.iterdir());(out/'SHA256SUMS.txt').write_text(''.join(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.name+'\n' for p in files))
+      - name: Upload, verify and publish
         shell: bash
         run: |
           set -euo pipefail
-          gh release upload v1.0.0 assets/TLCPlus.exe assets/TLCPlus-CSharp-v1.0.0-win-x64.zip assets/TLCPlus-CSharp-v1.0.0-assets.zip assets/SHA256SUMS.txt --clobber
-          gh api repos/$GH_REPO/releases/435568004 > remote.json
+          gh release upload "v$VERSION" assets/* --clobber
+          gh api "repos/$GH_REPO/releases/tags/v$VERSION" > remote.json
           python - <<'PY'
           import json,hashlib
           from pathlib import Path
-          data=json.loads(Path('remote.json').read_text())
-          expected={p.name:p for p in Path('assets').iterdir()}
-          assert len(data['assets'])==5
+          data=json.loads(Path('remote.json').read_text());expected={p.name:p for p in Path('assets').iterdir()}
+          assert len(data['assets'])==len(expected)==5
           for asset in data['assets']:
               p=expected[asset['name']]
               assert asset['state']=='uploaded'
               assert asset['digest']=='sha256:'+hashlib.sha256(p.read_bytes()).hexdigest()
           PY
-          gh release edit v1.0.0 --draft=false --latest
+          gh release edit "v$VERSION" --draft=false --latest

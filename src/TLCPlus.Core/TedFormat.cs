@@ -21,5 +21,21 @@ public sealed class TedDocument
         return doc;
     }
     public byte[] Write()=>(byte[])Bytes.Clone();
+    public void SetRestaurantRoad(int index,bool restaurant)
+    {
+        if(Settings.Scenery!=3)throw new InvalidOperationException("Restaurant road is currently verified only for Andalusia.");
+        SetRoadType(index,restaurant?0xB4CB0024E8474511UL:Catalog.Roads(3).GetProperty("normal")[0][0].GetUInt64());
+    }
+    public void SetRoadType(int index,ulong uuid,int? flag=null)
+    {
+        if(index<0||index>=Course.Roads.Count)throw new ArgumentOutOfRangeException(nameof(index));
+        var road=Course.Roads[index];
+        if(road.Flag is not (0 or 1)||RoadTypeCatalog.IsProtectedUuid(Settings.Scenery,road.Uuid))throw new InvalidOperationException("Start/finish and special flagged road sections cannot be replaced.");
+        if(flag.HasValue&&flag is not (0 or 1))throw new ArgumentOutOfRangeException(nameof(flag));
+        if(!RoadTypeCatalog.IsEditableUuid(Settings.Scenery,uuid))throw new InvalidOperationException("Choose a documented single-part road type for this scenery.");
+        int offset=checked((int)Binary.U32(Bytes,132)+index*20);Binary.W64(Bytes,offset,uuid);
+        if(flag.HasValue)Binary.W32(Bytes,offset+8,(uint)flag.Value);
+        Course.Roads[index]=road with{Uuid=uuid,Flag=flag??road.Flag};
+    }
     public void SetRoadWidth(double width){if(!double.IsFinite(width)||width<=0)throw new ArgumentOutOfRangeException(nameof(width));Settings.RoadWidth=width;Binary.WF(Bytes,16,width);Binary.WF(Bytes,20,width/2);Binary.WF(Bytes,24,width/2);}
 }

@@ -32,5 +32,12 @@
   "C# edition": "C# 版",
   "TLC — created by eran0004": "TLC — 制作: eran0004",
   "TLC+ (Python and C#) — created by daydrive7": "TLC+ (Python / C#) — 制作: daydrive7",
-  "TLC+ (Python, C#, and Web) — created by daydrive7": "TLC+ (Python、C#、Web) — 制作: daydrive7"
+  "TLC+ (Python, C#, and Web) — created by daydrive7": "TLC+ (Python、C#、Web) — 制作: daydrive7",
+  "ROAD TYPES": "道路タイプ",
+  "Place road type": "道路タイプを配置",
+  "Remove road type": "道路タイプを削除",
+  "Clear road types": "道路タイプをすべて削除",
+  "Flip road orientation": "道路の向きを反転",
+  "Restaurant / parking road": "レストラン / 駐車場の道路",
+  "Normal road": "通常の道路"
 }

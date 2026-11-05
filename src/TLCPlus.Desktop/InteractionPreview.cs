@@ -24,7 +24,7 @@ public partial class MainForm
             Canvas.Course=Exporter.BuildPlanPreview(Project);
             RefreshCanvasStats(Canvas.Course);
             InteractivePreviewBuilds++;
-        }catch{Canvas.Course=null;}
+        }catch{Canvas.Course=BaseRoadPreview(true);}
         finally{if(invalidate)Canvas.Invalidate();LastInteractivePreviewMs=timer.Elapsed.TotalMilliseconds;}
     }
     void EndInteractivePreview(){interactionPending=false;interactionTimer.Stop();}

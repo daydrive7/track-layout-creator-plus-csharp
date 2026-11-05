@@ -9,7 +9,7 @@ public partial class MainForm
     void SwitchScene(int scenery)
     {
         if(Project.Settings.Scenery==scenery)return;
-        if(Project.Decorations.Count>0){if(MessageBox.Show("Changing scenery clears placed decorations because each scenery uses different models. Continue?","Change scenery",MessageBoxButtons.YesNo,MessageBoxIcon.Question)!=DialogResult.Yes)return;Project.Decorations.Clear();}
+        if(Project.Decorations.Count>0||Project.RoadPlacements.Count>0){if(MessageBox.Show("Changing scenery clears placed decorations and road types because each scenery uses different models. Continue?","Change scenery",MessageBoxButtons.YesNo,MessageBoxIcon.Question)!=DialogResult.Yes)return;Project.Decorations.Clear();Project.RoadPlacements.Clear();}
         Project.Settings.Scenery=scenery;Commit();BuildPalette();
     }
     void InitializePreferences()

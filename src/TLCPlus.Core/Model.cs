@@ -88,6 +88,7 @@ public class Project
     public Settings Settings {get;set;}=new();
     public List<Node> Nodes {get;set;}=[];
     public List<Decoration> Decorations {get;set;}=[];
+    public List<RoadPlacement> RoadPlacements {get;set;}=[];
     public short ReservedCt {get;set;}
     public short ReservedCm {get;set;}
     public ushort? OriginalSceneryCopy {get;set;}
