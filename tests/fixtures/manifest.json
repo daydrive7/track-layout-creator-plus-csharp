@@ -1,0 +1,626 @@
+[
+  {
+    "name": "1_0_normal",
+    "trk5_sha256": "70be15f7656012eb0e0439e27debcc91bdcf051c0cf8f28b9d203caba95f7310",
+    "ted_sha256": "939aac4aa91ef5273c225a2c9bfce374d21b15f34e2fae3a662bdb5e6ae3692c",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "1_0_manual",
+    "trk5_sha256": "ea24f63e8ce8d512651882d6a5700eec6e98501d09684a13a57184263822f729",
+    "ted_sha256": "b09295542d9c53a2291d9b6b004cac58a60621679fe9661a95e20b2888a6086e",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "1_0_offset",
+    "trk5_sha256": "b0cf458f35542fa0911435436915022e98ed23afd164dd069b17fa20a08cd6b7",
+    "ted_sha256": "ac962464f9a58086d64b33c7abca7bd18a83a44592d690fd9225715caa7e2223",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "1_0_narrow",
+    "trk5_sha256": "4af08d244d2813132c0e5c3c7546e043acbf2aaed302b7d6354e96efd92e99f5",
+    "ted_sha256": "65674574063df4b3ea74df47d298a69851c60cd90cde59369312ba8893b73826",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "1_0_short",
+    "trk5_sha256": "987db129c55f623567efee9193ae84f04a3949b3ad353f62153600148e571653",
+    "ted_sha256": "904a1549fa612ab40a9be2105c3de153eefc18f46d627123b3d75cd7cfd16bd4",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "1_1_normal",
+    "trk5_sha256": "cbeb95afd1bbc80f2134e798d7496bc4d8f556a6b56f5b6f1fa4bf92446a1e0e",
+    "ted_sha256": "088728b5cebdc5cfd3ee2481c5b3be4cea5123e1367b80fc41dddfa8a1f1b763",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "1_1_manual",
+    "trk5_sha256": "21166d4e27dfa62e440a8cc1e17100fc7387592ba6a9ee7cf7c98d380a8d6b1c",
+    "ted_sha256": "15c05f932c310240eb24f146d8f5415f4d4415d3ec53e6cc6eb042a4c28ae7bb",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "1_1_offset",
+    "trk5_sha256": "d8a1f8598a12d6a53d579abfbcc5d6eb0dbca433e11c4f5ce86364b0c14f4303",
+    "ted_sha256": "5a7dfab88f5db7c31b41e2b78f9bd82b30034c70c36170b2fda4d82bca16777d",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "1_1_narrow",
+    "trk5_sha256": "e36342e90c5afc255a067ede328a041df0d0deb4d07613b08aea34250f99c48c",
+    "ted_sha256": "b1c3414a792b368a24d3a83d0db907bfbe43457475badea67a5483d53ac95930",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "1_1_short",
+    "trk5_sha256": "980688115689afb18f750e9e3961111b1e5b8cb97dc45221663427f146a91d4e",
+    "ted_sha256": "ac78b9192df6077e68077f086424f2ce214d6a7048b70204c4bf314af2a98216",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "2_0_normal",
+    "trk5_sha256": "390ac7f4f664559fc9a6e00ac9931ffda0a7429bf584253c4878920e48a8c97f",
+    "ted_sha256": "9f7695ed4cf086acf9302dc3fd73842253903502b0fd76a852f2d29b7ae592ac",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "2_0_manual",
+    "trk5_sha256": "c09451c6c499cfe98fea07e8816bd036cefcaa9c4ceeb0ca30c52c93d8d519fa",
+    "ted_sha256": "9036ed97a56c5a3217a908585e80581f7e50b186538008c61e0399ca29ec7adf",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "2_0_offset",
+    "trk5_sha256": "011640c4448f693e544ae2fe9dbace16d49c53ae087e3947a2270b7f687406b4",
+    "ted_sha256": "c6b387bb48104d3e9f3eae8dbb0e9c8272471b82ba9d6551e19a2625eae808de",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "2_0_narrow",
+    "trk5_sha256": "2ee4424f3be704ec36fad3da492fa6777d387a248d7ac74ef9e0d098b1cc00e0",
+    "ted_sha256": "814d24f8dd51d94516fe105da9bcf281ed4810f7daf6dc84429aa24e5d47e048",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "2_0_short",
+    "trk5_sha256": "498416a35bc9febce3a00c501663c0feb930b52854ee4d01f4e8a24d0f84b3c4",
+    "ted_sha256": "b412f87b69e9b8bc41e505053bb7295579857656c0b3ddfdcebe7df8cf6fe5d7",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "2_1_normal",
+    "trk5_sha256": "f1d7fe82bc3134250a3341dd4eca99be612b67d14b98cb5f02a069c8a0fe3309",
+    "ted_sha256": "a52c4a2cc594a9bc3b7e9430bff5d9465ffdc9e1b9b8587b30c5bbd9b890ab81",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "2_1_manual",
+    "trk5_sha256": "da7bd44d998a25fffb9302cfeefb6659c4a18b17d6cea7503443d8f5efc79394",
+    "ted_sha256": "d9f79dbcacbaad2ada9c85e5d151b3b3ce0e31f2ae4582a102bb567d4e68869d",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "2_1_offset",
+    "trk5_sha256": "67ea03c8091a9225d7e84616e657984c006a33e135e9689549d906623149e350",
+    "ted_sha256": "e49fe9af5cd3bec0e8442d85e17a3c01c7dec44f6092462fa44bc85606fb497c",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "2_1_narrow",
+    "trk5_sha256": "457d3a9ba0e35b3916be2f33476cb20b819752c392f3c827a2c2ec2d37a46464",
+    "ted_sha256": "36f50f056051114671549485ad1afd884c96426262d1344684718b3093add202",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "2_1_short",
+    "trk5_sha256": "18dfd0c3fd8ae538a329634e5d5bd5ccecdcfd16e49f9413717107d47e07795d",
+    "ted_sha256": "6514e9d5e40b95a561bbb1f7d486c2683e71269c6b4502c28d5a5acea09c359a",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "3_0_normal",
+    "trk5_sha256": "14f48a4e7446007be5e37bd7a0fa738118dbc09e924d4ac0b7afac9ffc2c6ddb",
+    "ted_sha256": "3e5999627dcb5c52fedf72a5c4bbbaef7fa28e9aed47e24b239380127aa5f637",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "3_0_manual",
+    "trk5_sha256": "b74fb7c009a47d930b5f3850c1b3dcd35e7c23210cb3860919bc9122c9829c47",
+    "ted_sha256": "c148bdb9d13bbb7062434c60a4fa8fc2baf8af34d0390185c43e7ae65d8df6f3",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "3_0_offset",
+    "trk5_sha256": "27da3486757d164350f45e03d5c0d3852492d453a9ea43faf942005489d21921",
+    "ted_sha256": "3168aea0ad23310711a8937e2b88b510fd31dd9c9310932d8ca07b27fa90b858",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "3_0_narrow",
+    "trk5_sha256": "0a5ff9cdb9e47774b277ba8fe600a51f8f79f4e8c9e52b4d204eb0d71d9e2590",
+    "ted_sha256": "62670de9c081f41ce1495282e739926f7e3dc58a1bf914d8ceeda053aa0966ab",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "3_0_short",
+    "trk5_sha256": "0ee6eac83a2a2beed563e824b4a5455c11aad829929eae15a120f4f55ad0222f",
+    "ted_sha256": "b5aad937b578defc60f623bd1cfa45f0fbac4be5e51c53c724dc400f274fdbbd",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "3_1_normal",
+    "trk5_sha256": "ea18afe52c19548935914119980bdef062109cd83fa76fc7f01fed330e407dc5",
+    "ted_sha256": "2e24ab32e2276ec1f0ef3a5b4d255d698bf3f39010803fd588383ab59bf06b0a",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "3_1_manual",
+    "trk5_sha256": "b1eea8a869e520a85d3ab057815fcdf03dfa2022fa2c89aca4d81f8d73c0266a",
+    "ted_sha256": "327b37bfc5c0f18c028949bda79b163f2e1c6afdcdee908722aa0d2d4a542fd6",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "3_1_offset",
+    "trk5_sha256": "52573a1439d69cc5a0bf8e36c14bf2e48f4c170d829e894ed770e4000300c7ee",
+    "ted_sha256": "a0c46a128f6966623b42a2f9c8a5f35803a736120efdf813a749088e7f3116ea",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "3_1_narrow",
+    "trk5_sha256": "402f7448d46e728baa3777d06a8a71c2216d8c8d19fe06cbea396bbf05b65604",
+    "ted_sha256": "bc9d4843598f0ce47eab64ab77e9a7389f2b384ab8d829e4a0680012e16c88f3",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "3_1_short",
+    "trk5_sha256": "f0b9ff70b959ad43269c3cf51487f3111ab4d651bf7a9d289ff1daa8d67fe233",
+    "ted_sha256": "605ff55171be85ad34598b810b584aaf514d4d2d731b4475785d54ebd8c60b18",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "5_0_normal",
+    "trk5_sha256": "cc4f2a9732ccd059ec64a0f80261edf93295d200fd5e08f41eafabefe2a2b6cb",
+    "ted_sha256": "b8a2b3746871362a74328e2673af066726e1f1e39fbbdbc066a1c9a7f5598d61",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "5_0_manual",
+    "trk5_sha256": "0eb85b8f6f720d429729caddd7fdef59cbef8890bf03b3de38fcaad4b62a3ef1",
+    "ted_sha256": "b840d535f815533478cea6bf7362c570920a0ce5b40f0e850c0088615e0dc345",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "5_0_offset",
+    "trk5_sha256": "7ef53cf35625ff8b4c0a9ad0567a2dccdd3821750e3f515d1ae9efdd39df318e",
+    "ted_sha256": "a56029ec88cce2a55e704b0f804279bf16ae27d0112599e53b3f2a0bbbe833f2",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "5_0_narrow",
+    "trk5_sha256": "bbcce869b92ed54967d755e1765173312d5b04c708c263e84a946f7b32061e5a",
+    "ted_sha256": "7a88757b8412fa6162def7bc59d81b42d4bf2f38261924a3fac1628cc94cfd43",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "5_0_short",
+    "trk5_sha256": "2edf431486238f3d219cd22a5c50948f7a8bf857ef023f1c1254a3a37f25d4dd",
+    "ted_sha256": "c4129cca5ad4657be13149db9d9cab1ee496122ab64f9d4367eac5bc24b9c886",
+    "cps": 17,
+    "heights": 638,
+    "decorations": 0
+  },
+  {
+    "name": "5_1_normal",
+    "trk5_sha256": "7645709b7d1fa43eef582dd0393d01ae942082c1aa1bf09d819f255e0a21afd0",
+    "ted_sha256": "6070803e927349982234e4a0a2011308c19f1dfdfc06af1821515fc592fd4513",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "5_1_manual",
+    "trk5_sha256": "f1ad01f2f727509e567c97e4182ae5dc57d22e1a0393602b5d53ddefe50526d2",
+    "ted_sha256": "f9ef806199b92ffc883d70c4804ac963af56c06f12c1f37c3a065f6e856a30f8",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "5_1_offset",
+    "trk5_sha256": "7b2fff0b0df234d7de0d6d4e733e2bde399e86df5ef1fdb57c883c1968b9dd74",
+    "ted_sha256": "12c2945d688d6d74436539c09886f84e2a62e48c4b05e0b3e1dfc6892b28d6ee",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "5_1_narrow",
+    "trk5_sha256": "43ca5c70f6292f3efd37e3fcfe1a05a83a4c24922d185c4d0b3d7156fae0c036",
+    "ted_sha256": "ab2a87a38866d9a51bda75eb90e4fec9f77a96a2f48e2b301ce78d80c5e017c8",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "5_1_short",
+    "trk5_sha256": "f93d462fd552f0f6777994c39704566aed4f74877da28ea06317f27a0a958239",
+    "ted_sha256": "b268436f315f745b99509ae39a6dafc55f56c5c259272ab087577fd64b24927e",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 0
+  },
+  {
+    "name": "edge_0",
+    "trk5_sha256": "cbd1fc6e72471feeb26cfcde30417bf9d7f6f6039cf7953ee77f9bccac5e65f5",
+    "ted_sha256": "54f2475f4260d7dce64f694896180765721810195d8dfa178399e1fdc1229124",
+    "cps": 20,
+    "heights": 448,
+    "decorations": 0
+  },
+  {
+    "name": "edge_1",
+    "trk5_sha256": "9cf3e63a6ae27e9e4c1b736aacd8cc1a0b8625ebf1e82a0ec5df041ab56df785",
+    "ted_sha256": "2adc887a1b66e9e57a4c80834a33ca782b5eefd11d8546de5b14a13d935441ae",
+    "cps": 20,
+    "heights": 446,
+    "decorations": 0
+  },
+  {
+    "name": "edge_2",
+    "trk5_sha256": "8555e6929d24633ec25455b3f1524f03cf39c28a319c2f26596a6e9c9f3a7489",
+    "ted_sha256": "d53e48b20cec74863b2bd1e50b64742eb0fd2a61a5c3199ae331e00994567b76",
+    "cps": 2,
+    "heights": 14,
+    "decorations": 0
+  },
+  {
+    "name": "edge_3",
+    "trk5_sha256": "74f678e3dc867cb44967b14118b48d5baa92d05fccaa27e87faefe1b90c0352f",
+    "ted_sha256": "74c9612ddca230cf96563796350b3f2996b119fd83a6c73be3b354f9b362ef86",
+    "cps": 4,
+    "heights": 138,
+    "decorations": 0
+  },
+  {
+    "name": "decorations_1",
+    "trk5_sha256": "cbeb95afd1bbc80f2134e798d7496bc4d8f556a6b56f5b6f1fa4bf92446a1e0e",
+    "ted_sha256": "c1f4862878bbcffa2a80932e41a576449a1ca9229827204041949cc6ed502f7e",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 19
+  },
+  {
+    "name": "decorations_2",
+    "trk5_sha256": "f1d7fe82bc3134250a3341dd4eca99be612b67d14b98cb5f02a069c8a0fe3309",
+    "ted_sha256": "f9992fdcc1bf458aa0f935d44117b66a13731c411688e8bbe7cba7d9273bb146",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 18
+  },
+  {
+    "name": "decorations_3",
+    "trk5_sha256": "ea18afe52c19548935914119980bdef062109cd83fa76fc7f01fed330e407dc5",
+    "ted_sha256": "b29f7a9ec58bc7183a9bd3b922eb589c4dcaaa7671e1d2eb506038aa60383881",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 25
+  },
+  {
+    "name": "decorations_5",
+    "trk5_sha256": "7645709b7d1fa43eef582dd0393d01ae942082c1aa1bf09d819f255e0a21afd0",
+    "ted_sha256": "97ed5d646bf1fc88d8d9ac925da50b3288baa3c61382ce355666724abdc02cbe",
+    "cps": 30,
+    "heights": 783,
+    "decorations": 18
+  },
+  {
+    "name": "random_00",
+    "trk5_sha256": "80b91aaf8b1af3adfb51365c6e046ee00d8e91a7071e4c590ce5c5ca86de3b62",
+    "ted_sha256": "0e4c9f77eca96682cd8729868658b8bd43b6228f4bf19ad0225de40f33affb77",
+    "cps": 58,
+    "heights": 1065,
+    "decorations": 0
+  },
+  {
+    "name": "random_01",
+    "trk5_sha256": "dd633e2f5942d86a85c26ef846d73768d18a510bf63fd400d325ee8b65d0041f",
+    "ted_sha256": "0b96ad2fedc707732cb1fb8b79d727f9b6e0381a93565388e102eebd1b331f07",
+    "cps": 21,
+    "heights": 1016,
+    "decorations": 0
+  },
+  {
+    "name": "random_02",
+    "trk5_sha256": "1676c068198f802c5f98add822a98b76c647a61ba63a464a30dff3c05d480e1d",
+    "ted_sha256": "07b0eb2968eaa1520461bb03551523d342a96ec67aee81df5c26e877b3974c8b",
+    "cps": 44,
+    "heights": 1020,
+    "decorations": 0
+  },
+  {
+    "name": "random_03",
+    "trk5_sha256": "4960a08db987c6ef0fd2394a1832a8b43345704c56ac1a9d39c5bb6bb91f675c",
+    "ted_sha256": "74b4edc50dfbd3908babb830f71fb4c7b5a7f2cebf88ade81b101950e725464d",
+    "cps": 38,
+    "heights": 1011,
+    "decorations": 0
+  },
+  {
+    "name": "random_04",
+    "trk5_sha256": "e4017b4813b910f4af3653a91dddc053a29c1db9cae389803a2badebda549af9",
+    "ted_sha256": "f31ac772136375d2885b7699ae07d81bc0b770f7878a4f12a415a4034fe419b2",
+    "cps": 21,
+    "heights": 718,
+    "decorations": 0
+  },
+  {
+    "name": "random_05",
+    "trk5_sha256": "c2f093759cdc8f788419a32cae9192a10a95fd9fe326483fe0579fdbb2e22b1d",
+    "ted_sha256": "e33ff556397683d757daf6cfba2c6c38510494aa9dba7148af6281a4cbde3537",
+    "cps": 18,
+    "heights": 756,
+    "decorations": 0
+  },
+  {
+    "name": "random_06",
+    "trk5_sha256": "1e6c4994f52150b4091bb30a144237101bf6b7eb0b58b7088b308bd306dd81c5",
+    "ted_sha256": "cdc5a654b5e147fd899c02b1a2d9f40da660b37fb46798d99e47679efb708958",
+    "cps": 22,
+    "heights": 772,
+    "decorations": 0
+  },
+  {
+    "name": "random_07",
+    "trk5_sha256": "31530883721f9c5d6aa371b3c6e7fa04e4cdf55e7f7cbef055a61786e0b1bfba",
+    "ted_sha256": "65499876af8bbbede8a031df965db30db2dd999e542863a46f2dd3e1bff82e72",
+    "cps": 92,
+    "heights": 1397,
+    "decorations": 0
+  },
+  {
+    "name": "random_08",
+    "trk5_sha256": "ba7ee5eb32f5b3c9a7274e428966f1a012b7ec6dae96e702ec7f31b79dfb2eac",
+    "ted_sha256": "8f3c69232d57c14afd83d33eed68ee107fbad5dc148137d23f7bf26943dd717a",
+    "cps": 20,
+    "heights": 822,
+    "decorations": 0
+  },
+  {
+    "name": "random_09",
+    "trk5_sha256": "f2fee2e18362a85c03d16490e9512debabb03c7bc274b70d2203b9c92544b91b",
+    "ted_sha256": "a5c37303ccecda74874f752120a48048e0d5ec1daf555ab684465de5ed7c62ca",
+    "cps": 26,
+    "heights": 908,
+    "decorations": 0
+  },
+  {
+    "name": "random_10",
+    "trk5_sha256": "ae200a4aa96c414c3d01a5b3cedbc8edf8510f739a52c1981ad0a237ba490613",
+    "ted_sha256": "9d6eefe8924409b02cd6aad8fab37de785ef23e77f1c6b3066402ce424d78ed8",
+    "cps": 26,
+    "heights": 880,
+    "decorations": 0
+  },
+  {
+    "name": "random_11",
+    "trk5_sha256": "6fa406bacfe8f6f534d65a417e5b2c7fcd420ebf896c1b25e22813cba158851d",
+    "ted_sha256": "e15565d46a26c4c26190380232c33f1aa3dc97f029a96bb21f8b5a651962e4a9",
+    "cps": 46,
+    "heights": 1062,
+    "decorations": 0
+  },
+  {
+    "name": "random_12",
+    "trk5_sha256": "a184427db7e6064684866ff98612d95567dd30833ae904c6d96a3b4c46618c28",
+    "ted_sha256": "e5d2e0af571468bbc023fb38ef0a81c72d1d84b4b1b4c8395e5cbb6c628b9b93",
+    "cps": 41,
+    "heights": 920,
+    "decorations": 0
+  },
+  {
+    "name": "random_13",
+    "trk5_sha256": "c87758b811d5541f6dfd262502c76365d00df6fd05134047c45afbf61091852f",
+    "ted_sha256": "89949aa5d01954b9f1c97561478d43bd8f48628cc8a41c50354e1de13e38fdae",
+    "cps": 27,
+    "heights": 902,
+    "decorations": 0
+  },
+  {
+    "name": "random_14",
+    "trk5_sha256": "b6eeeb1758197306680857f2d12e63fa3ea7c54735cf0396007e055dc1c0fbb3",
+    "ted_sha256": "882b481829720e86d51eeb32d756a6bd988ba55c4ad2c582477ecc1097d12976",
+    "cps": 40,
+    "heights": 908,
+    "decorations": 0
+  },
+  {
+    "name": "random_15",
+    "trk5_sha256": "bcba34f66ee63201c2ec4784983cf5e237fc7f9334ba712e071ac8ff77f7eed9",
+    "ted_sha256": "37297996aa2a1ef92b75561a452f1311e0fa302c1f4bfcb4ca24dd0141695230",
+    "cps": 69,
+    "heights": 1255,
+    "decorations": 0
+  },
+  {
+    "name": "random_16",
+    "trk5_sha256": "e1c59be63a97e2c523d9002f76ab7a086ef22aad58dab397193f0060871d99fe",
+    "ted_sha256": "3216b84ba05fb77dfe55c70a034bc867966599e02f6fdc94a4795f0439e035cd",
+    "cps": 55,
+    "heights": 1011,
+    "decorations": 0
+  },
+  {
+    "name": "random_17",
+    "trk5_sha256": "f689f20ca4a884d7f228bd76ce12dea5c5a7dd164930741c1f21343863ec1fd2",
+    "ted_sha256": "a22732ed16d02d1ed708babd72c55308a647092167c46aff41a9c96114a82800",
+    "cps": 28,
+    "heights": 949,
+    "decorations": 0
+  },
+  {
+    "name": "random_18",
+    "trk5_sha256": "89344354f13a42f81142ec024bbba7c7bc87115b14fd113d05cfdbf6a0fc4a33",
+    "ted_sha256": "6a3c43266473a834afc9b82b141553759f03330e683481b6864085f7021a5a0e",
+    "cps": 54,
+    "heights": 1053,
+    "decorations": 0
+  },
+  {
+    "name": "random_19",
+    "trk5_sha256": "130f7a6be5209535b66f8907671ba729ff13d880fc16a73bb41b850191440f23",
+    "ted_sha256": "f4e67df0b5d79887e46afeb4da4efa00c99ae0965e4e440e3d7370a69e875c02",
+    "cps": 75,
+    "heights": 1171,
+    "decorations": 0
+  },
+  {
+    "name": "random_20",
+    "trk5_sha256": "ffb2dec28f8924a2ae9da2d15bcb0fe8d7032018060ae6399cc95e7cf38c2f83",
+    "ted_sha256": "2a81b4e2528d61550a6aa9ee6c10225baef26e4429edb35d8050cd2ff8211364",
+    "cps": 58,
+    "heights": 972,
+    "decorations": 0
+  },
+  {
+    "name": "random_21",
+    "trk5_sha256": "d9ba6e2565a4e82292b21cfa524248f1af3f4091589a8ba01326cb65708e91e7",
+    "ted_sha256": "f5dbec7ef068b9ddc0b4e510a95964300e4de6760052a41858986bd951aa4708",
+    "cps": 50,
+    "heights": 1146,
+    "decorations": 0
+  },
+  {
+    "name": "random_22",
+    "trk5_sha256": "f19feb70c6d79a37915780720bc300be14114fded173232632573ff73c49484d",
+    "ted_sha256": "2e329d8446d7ac12a2ece67a310d1135efe04b1771cab1293a8d1e4dad44774d",
+    "cps": 51,
+    "heights": 1079,
+    "decorations": 0
+  },
+  {
+    "name": "random_23",
+    "trk5_sha256": "184b36b774f4b84ecd865f869ffd2c39d27e5c546300ac0432daa7a9d8b89544",
+    "ted_sha256": "66ad19cfdf45b6afb949e08bd854e2958838467b135b3258070e0e5e8c1292c2",
+    "cps": 44,
+    "heights": 1086,
+    "decorations": 0
+  },
+  {
+    "name": "random_24",
+    "trk5_sha256": "65581d6c0c0f2b79d007c9c8d8aab3b3ff1542f5f44bdd1e15227a22133ef69b",
+    "ted_sha256": "3c2297cd11f6dfc18af61f867263e8f5fff4ed132a55434c091478a2a15b505a",
+    "cps": 26,
+    "heights": 665,
+    "decorations": 0
+  },
+  {
+    "name": "random_25",
+    "trk5_sha256": "cc43d69c95a9222bad656ab3cea06f3cee8de009292bb297a69daa6c744d7da9",
+    "ted_sha256": "62784f5f36b32c49f3c3b6582a6c29ead2eacb7a1df26528367e994956d5557d",
+    "cps": 25,
+    "heights": 923,
+    "decorations": 0
+  },
+  {
+    "name": "random_26",
+    "trk5_sha256": "9158221b6aed89ee5745cff373c654d9cbb9a88de4dbaaad01dfde3a83ba19df",
+    "ted_sha256": "589dc268b87a88c07d40492813f9012631479672d13fbcccdce4b8fd83448a01",
+    "cps": 22,
+    "heights": 724,
+    "decorations": 0
+  },
+  {
+    "name": "random_27",
+    "trk5_sha256": "9fc7987df92ab392380ff08aeef5892531cd9ce41fb240f2a3e77f34e6cc402a",
+    "ted_sha256": "318af1f8637f8dcc703fac31537cdb8ea6eadf76cef322272ac122ade6fd8467",
+    "cps": 38,
+    "heights": 1103,
+    "decorations": 0
+  },
+  {
+    "name": "random_28",
+    "trk5_sha256": "6c86b4e2e41a5addf001ae50a88a4202a0dc04422870b9ea00d7459998f9fc28",
+    "ted_sha256": "d767438e56db8b2b38fc2247c18eebc320c83ed530d7209be132d2583d6c9554",
+    "cps": 8,
+    "heights": 665,
+    "decorations": 0
+  },
+  {
+    "name": "random_29",
+    "trk5_sha256": "8771b72dc7ed01bcc765b995775cae85af439bf82707f249aefcae2061723f98",
+    "ted_sha256": "386f1cf215a2131b0e58d76c4614cf29912c92311b6fbbd801b3b8819f3c1e4f",
+    "cps": 81,
+    "heights": 1397,
+    "decorations": 0
+  }
+]

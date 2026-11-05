@@ -1,0 +1,10 @@
+{
+  "settings": {
+    "manualHeight": true,
+    "manualHeightIn": 0.65,
+    "manualHeightOut": 0.4,
+    "manualHeightEase": true,
+    "smoothMix": 1.0
+  },
+  "decorations": []
+}

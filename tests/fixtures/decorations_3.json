@@ -1,0 +1,193 @@
+{
+  "settings": {
+    "manualHeight": false,
+    "manualHeightIn": 1.0,
+    "manualHeightOut": 1.0,
+    "manualHeightEase": true,
+    "smoothMix": 1.0
+  },
+  "decorations": [
+    {
+      "type": 6,
+      "uuid": 12299049265887921425,
+      "side": "left",
+      "track": "A",
+      "vpos": 30
+    },
+    {
+      "type": 2,
+      "uuid": 13619448381637608721,
+      "side": "right",
+      "track": "B",
+      "vpos": 70
+    },
+    {
+      "type": 2,
+      "uuid": 10274962708361594129,
+      "side": "left",
+      "track": "AB",
+      "vpos": 110
+    },
+    {
+      "type": 2,
+      "uuid": 12313685964676875537,
+      "side": "right",
+      "track": "CURB",
+      "vpos": 150
+    },
+    {
+      "type": 2,
+      "uuid": 10772328992209323281,
+      "side": "left",
+      "track": "A",
+      "vpos": 190
+    },
+    {
+      "type": 1,
+      "uuid": 12519928539858312789,
+      "side": "right",
+      "track": "B",
+      "vpos": 230
+    },
+    {
+      "type": 12,
+      "uuid": 12560539519252120849,
+      "side": "left",
+      "track": "AB",
+      "vpos": 270
+    },
+    {
+      "type": 18,
+      "uuid": 11110098964262110481,
+      "side": "right",
+      "track": "CURB",
+      "vpos": 310
+    },
+    {
+      "type": 18,
+      "uuid": 12199610016361586261,
+      "side": "left",
+      "track": "A",
+      "vpos": 350
+    },
+    {
+      "type": 12,
+      "uuid": 13167602461269532245,
+      "side": "right",
+      "track": "B",
+      "vpos": 390
+    },
+    {
+      "type": 12,
+      "uuid": 10078696066846793301,
+      "side": "left",
+      "track": "AB",
+      "vpos": 430
+    },
+    {
+      "type": 12,
+      "uuid": 10374526267369692757,
+      "side": "right",
+      "track": "CURB",
+      "vpos": 470
+    },
+    {
+      "type": 12,
+      "uuid": 11207973673409945173,
+      "side": "left",
+      "track": "A",
+      "vpos": 510
+    },
+    {
+      "type": 20,
+      "uuid": 9508787821755188497,
+      "side": "right",
+      "track": "B",
+      "vpos": 550
+    },
+    {
+      "type": 20,
+      "uuid": 12031648038012798225,
+      "side": "left",
+      "track": "AB",
+      "vpos": 590
+    },
+    {
+      "type": 13,
+      "uuid": 13669269452515394833,
+      "side": "right",
+      "track": "CURB",
+      "vpos": 630
+    },
+    {
+      "type": 7,
+      "uuid": 12147537145670114901,
+      "side": "left",
+      "track": "A",
+      "vpos": 670
+    },
+    {
+      "type": 7,
+      "uuid": 11127471830070697557,
+      "side": "right",
+      "track": "B",
+      "vpos": 710
+    },
+    {
+      "type": 7,
+      "uuid": 13268933452885368405,
+      "side": "left",
+      "track": "AB",
+      "vpos": 750
+    },
+    {
+      "type": 14,
+      "uuid": 12248868137285951061,
+      "side": "right",
+      "track": "CURB",
+      "vpos": 790
+    },
+    {
+      "type": 8,
+      "uuid": 10769232767465506065,
+      "side": "left",
+      "track": "A",
+      "vpos": 830
+    },
+    {
+      "type": 8,
+      "uuid": 9605896688720364817,
+      "side": "right",
+      "track": "B",
+      "vpos": 870
+    },
+    {
+      "type": 8,
+      "uuid": 9987576757140014353,
+      "side": "left",
+      "track": "AB",
+      "vpos": 910
+    },
+    {
+      "type": 7,
+      "uuid": 13668346444837789269,
+      "side": "right",
+      "track": "CURB",
+      "vpos": 950
+    },
+    {
+      "type": 7,
+      "uuid": 9855204935338532437,
+      "side": "left",
+      "track": "A",
+      "vpos": 990
+    },
+    {
+      "type": 19,
+      "uuid": 10731515120586278161,
+      "side": "right",
+      "track": "B",
+      "vpos": 1030
+    }
+  ]
+}
