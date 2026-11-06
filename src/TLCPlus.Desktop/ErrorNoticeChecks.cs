@@ -48,6 +48,8 @@ static class ErrorNoticeChecks
                 timer.Tick+=(_,_)=>{
                     var dialog=Application.OpenForms.Cast<Form>().FirstOrDefault(f=>f!=form&&f.Text==UiLanguage.T("Preferences"));if(dialog==null)return;
                     timer.Stop();
+                    IEnumerable<Control> All(Control parent){foreach(Control child in parent.Controls){yield return child;foreach(var nested in All(child))yield return nested;}}
+                    if(All(dialog).Any(c=>UiLanguage.OriginalText(c) is "CUSTOM COLORS" or "Canvas color" or "Panel color" or "Reset custom colors")||!All(dialog).Any(c=>UiLanguage.OriginalText(c)=="Custom…"))throw new Exception("Preferences removed accent customization or retained panel/canvas colors");
                     Control? Find(Control parent){foreach(Control child in parent.Controls){if(child is NumericUpDown)return child;var found=Find(child);if(found!=null)return found;}return null;}
                     var duration=Find(dialog) as NumericUpDown??throw new Exception("Duration preference is missing");
                     if(duration.Minimum!=.5m||duration.Maximum!=5m||duration.DecimalPlaces!=1)throw new Exception("Notice preference exposes the wrong range");

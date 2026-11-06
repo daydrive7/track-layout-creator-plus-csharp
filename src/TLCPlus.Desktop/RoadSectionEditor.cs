@@ -8,7 +8,7 @@ public partial class MainForm
         using var open=new OpenFileDialog{Filter="GT6 TED|*.ted",Title="Edit TED road sections"};if(open.ShowDialog(this)!=DialogResult.OK)return;
         var document=TedDocument.Read(File.ReadAllBytes(open.FileName));
         using var dialog=new Form{Text=UiLanguage.T("TED road sections"),ClientSize=new(820,490),StartPosition=FormStartPosition.CenterParent,Font=new("Segoe UI",9),BackColor=UiTheme.Panel,ForeColor=UiTheme.Text};
-        var info=new Label{Dock=DockStyle.Top,Height=62,Padding=new(12),Text=UiLanguage.T("Changes keep the selected section lengths. Use Geometry → Road Types for complete road chains. Start/finish sections stay protected. Game appearance still needs in-game verification.")};
+        var info=new Label{Dock=DockStyle.Top,Height=62,Padding=new(12),Text=UiLanguage.T("Changes keep the selected section lengths. Use Decorations → Road Types for complete road chains. Start/finish sections stay protected. Game appearance still needs in-game verification.")};
         var choices=new ComboBox{DisplayMember="Name",DropDownStyle=ComboBoxStyle.DropDownList,Width=225};
         choices.Items.Add(new TedRoadChoice(UiLanguage.T("Normal road"),Catalog.Roads(document.Settings.Scenery).GetProperty("normal")[0][0].GetUInt64()));
         foreach(var type in RoadTypeCatalog.ForScenery(document.Settings.Scenery).Where(t=>t.Segments.Count==1))choices.Items.Add(new TedRoadChoice(type.Name,type.Segments[0].Uuid));choices.SelectedIndex=0;

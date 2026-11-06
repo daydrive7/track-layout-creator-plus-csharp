@@ -22,10 +22,6 @@
   "MIT License": "Licencia MIT",
   "Native interface and some behavior differ from Python.": "La interfaz nativa y algunos comportamientos difieren de Python.",
   "Close": "Cerrar",
-  "CUSTOM COLORS": "COLORES PERSONALIZADOS",
-  "Canvas color": "Color del lienzo",
-  "Panel color": "Color del panel",
-  "Reset custom colors": "Restablecer colores",
   "No public C# release is available yet.": "Aún no hay una versión pública de C#.",
   "You are using the latest C# version.": "Estás usando la última versión de C#.",
   "Version {0} is available. Open its download page?": "La versión {0} está disponible. ¿Abrir la página de descarga?",
@@ -43,5 +39,6 @@
   "ERROR NOTICES": "AVISOS DE ERROR",
   "Display duration (seconds)": "Duración (segundos)",
   "Errors appear above the canvas and fade away automatically.": "Los errores aparecen sobre el lienzo y se desvanecen automáticamente.",
-  "Error": "Error"
+  "Error": "Error",
+  "Road type tool": "Herramienta de tipos de carretera"
 }

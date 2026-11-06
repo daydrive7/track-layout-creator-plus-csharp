@@ -27,7 +27,7 @@ static class RoadToolChecks
         form.Undo();if(form.Project.RoadPlacements.Count!=0)throw new Exception("Road placement undo failed");form.Redo();if(form.Project.RoadPlacements.Count!=1)throw new Exception("Road placement redo failed");
         string path=Path.Combine(root,"work/road-placement-save.trk5");DocumentFiles.SaveLayout(path,form.Project);
         if(!File.ReadAllBytes(path).AsSpan().SequenceEqual(TrkFormat.Write(form.Project))||DocumentFiles.LoadLayout(path).RoadPlacements.Count!=1)throw new Exception("Road placement metadata roundtrip failed");
-        typeof(MainForm).GetMethod("ShowPage",Private)!.Invoke(form,[0]);Application.DoEvents();
+        typeof(MainForm).GetMethod("ShowPage",Private)!.Invoke(form,[3]);Application.DoEvents();
         using(var image=new Bitmap(form.Width,form.Height)){form.DrawToBitmap(image,new(0,0,image.Width,image.Height));image.Save(Path.Combine(root,"analysis/road-placement-preview.png"));}
         down.Invoke(form.Canvas,[new MouseEventArgs(MouseButtons.Right,1,location.X,location.Y,0)]);if(form.Project.RoadPlacements.Count!=0)throw new Exception("Road placement right-click removal failed");
         form.Project.RoadPlacements.Add(new(){TypeId=type.Id,Scenery=3,Start=-1});form.Commit();

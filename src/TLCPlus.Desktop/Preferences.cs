@@ -30,14 +30,14 @@ public partial class MainForm
             if(control is SplitContainer splitter)splitter.BackColor=UiTheme.Muted;
             else if(control==Canvas)control.BackColor=UiTheme.Canvas;
             else if(control==elevation)control.BackColor=UiTheme.NavBackground;
-            else if(control is Button button){button.BackColor=UiLanguage.OriginalText(button)=="Sidebar"?UiTheme.Accent:chrome?UiTheme.Chrome:UiTheme.Button;button.ForeColor=chrome?UiTheme.Contrast(UiTheme.Chrome):UiTheme.Text;button.FlatAppearance.MouseOverBackColor=UiTheme.Accent;}
+            else if(control is Button button){bool icon=Equals(button.Tag,"icon-button");button.BackColor=UiLanguage.OriginalText(button)=="Sidebar"?UiTheme.Accent:chrome?UiTheme.Chrome:icon?UiTheme.Panel:UiTheme.Button;button.ForeColor=chrome?UiTheme.Contrast(UiTheme.Chrome):UiTheme.Text;button.FlatAppearance.MouseOverBackColor=icon?UiTheme.Button:UiTheme.Accent;button.FlatAppearance.MouseDownBackColor=UiTheme.Button;}
             else{control.BackColor=chrome?UiTheme.Chrome:UiTheme.Panel;control.ForeColor=chrome?UiTheme.Contrast(UiTheme.Chrome):control is Label label&&label.Font.Bold?UiTheme.Header:UiTheme.Text;}
             if(control is Label brand&&(brand.Text=="TLC+"||brand.Text=="TLC+ C# 1.0.0")){brand.Visible=uiPreferences.ShowTitle;brand.ForeColor=UiTheme.Header;brand.BackColor=UiTheme.Chrome;}
             if(control is ToolStrip strip){strip.BackColor=UiTheme.Chrome;strip.ForeColor=UiTheme.Text;strip.Renderer=new PreferencesMenuRenderer();foreach(ToolStripItem item in strip.Items)ThemeMenu(item);}
             foreach(Control child in control.Controls)Walk(child);
         }
         void ThemeMenu(ToolStripItem item){item.ForeColor=UiTheme.Text;item.BackColor=item.Owner is MenuStrip?UiTheme.Chrome:UiTheme.Panel;if(item is ToolStripDropDownItem drop)foreach(ToolStripItem child in drop.DropDownItems)ThemeMenu(child);}
-        SuspendLayout();Walk(this);ApplyModuleVisibility();ReloadToolIcons();foreach(var item in iconButtons)item.Value.BackColor=item.Key==Canvas.Tool?UiTheme.Button:UiTheme.Panel;foreach(var window in preferenceWindows.Where(w=>!w.IsDisposed))ThemePreferenceWindow(window);ResumeLayout(true);Canvas.Invalidate();elevation.Invalidate();classicTabs.Invalidate();
+        SuspendLayout();Walk(this);ApplyModuleVisibility();ReloadToolIcons();RefreshToolButtons();foreach(var window in preferenceWindows.Where(w=>!w.IsDisposed))ThemePreferenceWindow(window);ResumeLayout(true);Canvas.Invalidate();elevation.Invalidate();classicTabs.Invalidate();
     }
     void ApplyModuleVisibility()
     {
@@ -46,7 +46,7 @@ public partial class MainForm
     void ReloadToolIcons()
     {
         string folder=Path.Combine(TLCPlus.Terrain.AssetsPath,"icons",UiTheme.Classic?"tools_light":"tools");var names=new Dictionary<string,string>{{"Pen tool","pen"},{"Selection tool","selection"},{"Camber tool","camber"},{"Panning tool","pan"},{"Decoration tool","decorate"},{"Zoom in","zoom_in"},{"Zoom out","zoom_out"},{"Reverse direction","reverse"},{"Save screenshot","screenshot"},{"Rotate Tool","rotate"},{"Scale Tool","scale"},{"Randomize Selected Nodes","random"}};
-        void Walk(Control control){if(control is Button button&&names.TryGetValue(button.AccessibleName??"",out string? name)){string path=Path.Combine(folder,name+".gif");if(File.Exists(path)){using var source=Image.FromFile(path);var previous=button.Image;button.Image=new Bitmap(source);previous?.Dispose();}}foreach(Control child in control.Controls)Walk(child);}Walk(this);
+        void Walk(Control control){if(control is Button button){if(button.AccessibleName=="Road type tool"){var previous=button.Image;button.Image=RoadToolIcon();previous?.Dispose();}else if(names.TryGetValue(button.AccessibleName??"",out string? name)){string path=Path.Combine(folder,name+".gif");if(File.Exists(path)){using var source=Image.FromFile(path);var previous=button.Image;button.Image=new Bitmap(source);previous?.Dispose();}}}foreach(Control child in control.Controls)Walk(child);}Walk(this);
     }
     void ThemePreferenceWindow(Form window)
     {
@@ -76,10 +76,6 @@ public partial class MainForm
         var swatches=new FlowLayoutPanel{Width=350,Height=29,FlowDirection=FlowDirection.LeftToRight,WrapContents=false,Margin=Padding.Empty};body.Controls.Add(swatches);var current=new Label{Width=350,Height=27,Font=new("Consolas",9),Margin=new(0,4,0,3)};void SelectAccent(Color color){uiPreferences.Accent=$"#{color.R:X2}{color.G:X2}{color.B:X2}";ApplyPreferences();current.Text=UiLanguage.T("Current:")+"  "+uiPreferences.Accent;SavePreferences();}
         foreach(string hex in new[]{"#0A84FF","#64D2FF","#30D158","#FFD60A","#FF9F0A","#FF453A","#FF8080","#BF5AF2"}){var swatch=new Button{Width=25,Height=24,BackColor=ColorTranslator.FromHtml(hex),FlatStyle=FlatStyle.Flat,Tag="swatch",Margin=new(1,1,1,1),AccessibleName=hex};swatch.FlatAppearance.BorderSize=1;swatch.FlatAppearance.BorderColor=UiTheme.Text;swatch.Click+=(_,_)=>SelectAccent(ColorTranslator.FromHtml(hex));swatches.Controls.Add(swatch);}
         var custom=new Button{Text="Custom…",Width=83,Height=25,FlatStyle=FlatStyle.Flat,Margin=new(6,0,0,0)};custom.Click+=(_,_)=>{using var picker=new ColorDialog{Color=UiTheme.Accent,FullOpen=true};if(picker.ShowDialog(dialog)==DialogResult.OK)SelectAccent(picker.Color);};swatches.Controls.Add(custom);current.Text=UiLanguage.T("Current:")+"  "+uiPreferences.Accent;body.Controls.Add(current);body.Controls.Add(new Label{Text="Looking for Track Settings?\nRoad width, Camber, Toggles, and Start/Pit alignments are located directly in the main Left Sidebar.",Width=350,Height=54,TextAlign=ContentAlignment.MiddleCenter,Margin=new(0,6,0,4),Font=new("Segoe UI",8,FontStyle.Italic)});
-        Separator();Header("CUSTOM COLORS");
-        void ColorChoice(string name,Func<Color> currentColor,Action<string> set){var button=new Button{Text=UiLanguage.T(name),Width=350,Height=28,FlatStyle=FlatStyle.Flat};button.Click+=(_,_)=>{using var picker=new ColorDialog{Color=currentColor(),FullOpen=true};if(picker.ShowDialog(dialog)==DialogResult.OK){set($"#{picker.Color.R:X2}{picker.Color.G:X2}{picker.Color.B:X2}");SavePreferences();ApplyPreferences();}};body.Controls.Add(button);}
-        ColorChoice("Canvas color",()=>UiTheme.Canvas,v=>uiPreferences.CanvasColor=v);ColorChoice("Panel color",()=>UiTheme.Panel,v=>uiPreferences.PanelColor=v);
-        var reset=new Button{Text=UiLanguage.T("Reset custom colors"),Width=350,Height=28,FlatStyle=FlatStyle.Flat};reset.Click+=(_,_)=>{uiPreferences.CanvasColor=uiPreferences.PanelColor=null;SavePreferences();ApplyPreferences();};body.Controls.Add(reset);
         ThemePreferenceWindow(dialog);UiLanguage.Apply(dialog);dialog.ShowDialog(this);preferenceWindows.Remove(dialog);SavePreferences();
     }
     async Task CheckForUpdatesAsync(bool manual)

@@ -6,8 +6,6 @@ public sealed class AppPreferences
     [JsonPropertyName("language")] public string Language {get;set;}="en";
     [JsonPropertyName("theme")] public string Theme {get;set;}="Dark";
     [JsonPropertyName("accent_color")] public string Accent {get;set;}="#0A84FF";
-    public string? CanvasColor {get;set;}
-    public string? PanelColor {get;set;}
     [JsonPropertyName("show_proc_gen")] public bool ShowProcedural {get;set;}=true;
     [JsonPropertyName("show_img_vec")] public bool ShowTracer {get;set;}
     [JsonPropertyName("show_ext_path")] public bool ShowImports {get;set;}=true;
@@ -61,12 +59,11 @@ public static class UiTheme
     public static Color Accent {get;private set;}=Color.FromArgb(10,132,255);
     public static Color AccentLight {get;private set;}=Color.FromArgb(96,175,255);
     public static Color AccentDark {get;private set;}=Color.FromArgb(7,92,178);
-    static Color? customPanel,customCanvas;
-    public static Color Panel=>customPanel??(Classic?Color.FromArgb(240,240,240):Color.FromArgb(30,30,30));
+    public static Color Panel=>Classic?Color.FromArgb(240,240,240):Color.FromArgb(30,30,30);
     public static Color Button=>Classic?Color.FromArgb(226,229,234):Color.FromArgb(45,45,45);
     public static Color Text=>Contrast(Panel);
     public static Color Muted=>Classic?Color.FromArgb(114,115,115):Color.FromArgb(133,133,133);
-    public static Color Canvas=>customCanvas??(Classic?Color.FromArgb(248,249,251):Color.FromArgb(37,37,38));
+    public static Color Canvas=>Classic?Color.FromArgb(248,249,251):Color.FromArgb(37,37,38);
     public static Color Contrast(Color color)=>color.GetBrightness()>.55?Color.FromArgb(33,33,33):Color.FromArgb(230,230,230);
     public static Color CanvasText=>Contrast(Canvas);
     public static Color Chrome=>Classic?Color.FromArgb(242,243,245):Color.FromArgb(23,25,29);
@@ -81,7 +78,6 @@ public static class UiTheme
     public static Color NavCursor=>Classic?Color.FromArgb(247,247,247):Color.FromArgb(255,69,58);
     public static Color Arrow=>Classic?Color.FromArgb(33,33,33):Color.FromArgb(255,214,10);
     public static Color Header=>Classic?AccentDark:AccentLight;
-    public static void Apply(AppPreferences preferences){Classic=preferences.Theme=="Classic";customPanel=Parse(preferences.PanelColor);customCanvas=Parse(preferences.CanvasColor);Accent=ColorTranslator.FromHtml(preferences.Accent);AccentLight=Mix(Accent,Color.White,.35);AccentDark=Mix(Accent,Color.Black,.30);}
-    static Color? Parse(string? value){try{return string.IsNullOrWhiteSpace(value)?null:ColorTranslator.FromHtml(value);}catch{return null;}}
+    public static void Apply(AppPreferences preferences){Classic=preferences.Theme=="Classic";Accent=ColorTranslator.FromHtml(preferences.Accent);AccentLight=Mix(Accent,Color.White,.35);AccentDark=Mix(Accent,Color.Black,.30);}
     static Color Mix(Color a,Color b,double amount)=>Color.FromArgb((int)(a.R+(b.R-a.R)*amount),(int)(a.G+(b.G-a.G)*amount),(int)(a.B+(b.B-a.B)*amount));
 }
