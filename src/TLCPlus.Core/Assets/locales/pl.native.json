@@ -39,5 +39,9 @@
   "Clear road types": "Wyczyść typy drogi",
   "Flip road orientation": "Odwróć orientację drogi",
   "Restaurant / parking road": "Droga z restauracją / parkingiem",
-  "Normal road": "Zwykła droga"
+  "Normal road": "Zwykła droga",
+  "ERROR NOTICES": "POWIADOMIENIA O BŁĘDACH",
+  "Display duration (seconds)": "Czas wyświetlania (sekundy)",
+  "Errors appear above the canvas and fade away automatically.": "Błędy pojawiają się nad płótnem i automatycznie znikają.",
+  "Error": "Błąd"
 }

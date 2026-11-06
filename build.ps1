@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop'
 $root = $PSScriptRoot
-$destination = Join-Path $root 'release\TLCPlus-CSharp-v1.0.1'
+$destination = Join-Path $root 'release\TLCPlus-CSharp-v1.0.2'
 $publishArguments = @(
     'publish', "$root\src\TLCPlus.Desktop\TLCPlus.Desktop.csproj",
     '-c', 'Release', '-r', 'win-x64', '--self-contained', 'true',

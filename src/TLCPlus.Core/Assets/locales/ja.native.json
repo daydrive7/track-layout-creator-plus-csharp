@@ -39,5 +39,9 @@
   "Clear road types": "道路タイプをすべて削除",
   "Flip road orientation": "道路の向きを反転",
   "Restaurant / parking road": "レストラン / 駐車場の道路",
-  "Normal road": "通常の道路"
+  "Normal road": "通常の道路",
+  "ERROR NOTICES": "エラー通知",
+  "Display duration (seconds)": "表示時間（秒）",
+  "Errors appear above the canvas and fade away automatically.": "エラーはキャンバス上部に表示され、自動的にフェードアウトします。",
+  "Error": "エラー"
 }

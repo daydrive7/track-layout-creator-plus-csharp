@@ -39,5 +39,9 @@
   "Clear road types": "Очистить типы дороги",
   "Flip road orientation": "Изменить ориентацию дороги",
   "Restaurant / parking road": "Дорога с рестораном / парковкой",
-  "Normal road": "Обычная дорога"
+  "Normal road": "Обычная дорога",
+  "ERROR NOTICES": "УВЕДОМЛЕНИЯ ОБ ОШИБКАХ",
+  "Display duration (seconds)": "Время показа (секунды)",
+  "Errors appear above the canvas and fade away automatically.": "Ошибки появляются над холстом и автоматически исчезают.",
+  "Error": "Ошибка"
 }

@@ -34,6 +34,7 @@ static class Smoke
             checks.Add("Node number switch hides/restores rendered labels and persists its setting");
             form.Canvas.ShowNodeProperties=priorProperties;
             ReleaseReviewChecks.Run(form,root,checks);
+            ErrorNoticeChecks.Run(form,root,checks);
             RoadToolChecks.Run(form,root,checks);
             int before=form.Project.Nodes.Count;form.Canvas.Selected=[1];form.Delete();if(form.Project.Nodes.Count!=before-1)throw new Exception("Delete failed");form.Undo();if(form.Project.Nodes.Count!=before)throw new Exception("Undo failed");form.Redo();if(form.Project.Nodes.Count!=before-1)throw new Exception("Redo failed");form.Undo();checks.Add("Node deletion, undo, redo");
             double x=form.Project.Nodes[0].X;form.Canvas.Selected.Clear();form.Transform("rotate",15);form.Undo();if(form.Project.Nodes[0].X!=x)throw new Exception("Transform undo failed");checks.Add("Selection and transforms");

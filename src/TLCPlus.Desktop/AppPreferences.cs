@@ -20,6 +20,8 @@ public sealed class AppPreferences
     [JsonPropertyName("show_node_properties")] public bool ShowNodeProperties {get;set;}=true;
     [JsonPropertyName("trace_accuracy")] public int TraceAccuracy {get;set;}=50;
     [JsonPropertyName("last_notified_version")] public string LastNotifiedVersion {get;set;}="";
+    [JsonPropertyName("error_notice_seconds")] public double ErrorNoticeSeconds {get;set;}=3.5;
+    internal static double NoticeDuration(double value)=>double.IsFinite(value)?Math.Clamp(value,.5,5):3.5;
     public static string FilePath=>Path.Combine(AppContext.BaseDirectory,"config.json");
     public static AppPreferences Load()
     {
@@ -40,11 +42,13 @@ public sealed class AppPreferences
                 System.Globalization.CultureInfo.InvariantCulture, out _))
             result.Accent = "#0A84FF";
         result.TraceAccuracy = Math.Clamp(result.TraceAccuracy, 50, 100);
+        result.ErrorNoticeSeconds = NoticeDuration(result.ErrorNoticeSeconds);
         return result;
     }
 
     public void Save()
     {
+        ErrorNoticeSeconds = NoticeDuration(ErrorNoticeSeconds);
         string temporary = FilePath + ".tmp";
         File.WriteAllText(temporary, JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true }));
         File.Move(temporary, FilePath, true);

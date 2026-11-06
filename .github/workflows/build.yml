@@ -37,4 +37,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: TLCPlus-CSharp-win-x64
-          path: release/TLCPlus-CSharp-v1.0.1/
+          path: release/TLCPlus-CSharp-v1.0.2/

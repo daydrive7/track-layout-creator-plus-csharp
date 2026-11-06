@@ -63,6 +63,12 @@ public partial class MainForm
         Header("Sidebar Module Manager");
         Toggle("Show Procedural Track Builder",uiPreferences.ShowProcedural,v=>{uiPreferences.ShowProcedural=v;ApplyModuleVisibility();});Toggle("Show Track Tracer",uiPreferences.ShowTracer,v=>{uiPreferences.ShowTracer=v;ApplyModuleVisibility();});Toggle("Show External Path Imports",uiPreferences.ShowImports,v=>{uiPreferences.ShowImports=v;ApplyModuleVisibility();});Toggle("Allow Circuit on Rally Stages (Exp.)",uiPreferences.AllowRallyCircuit,v=>uiPreferences.AllowRallyCircuit=v,8);
         Separator();Header("UI THEME (W.I.P)");Toggle("Light Mode (W.I.P) — classic TLC look",UiTheme.Classic,v=>{uiPreferences.Theme=v?"Classic":"Dark";ApplyPreferences();});Separator();
+        Header("ERROR NOTICES");
+        body.Controls.Add(new Label{Text="Errors appear above the canvas and fade away automatically.",Width=350,Height=34,Margin=new(0,0,0,4),Font=new("Segoe UI",8)});
+        var noticeRow=new Panel{Width=350,Height=32,Margin=new(0,0,0,6)};
+        noticeRow.Controls.Add(new Label{Text="Display duration (seconds)",Dock=DockStyle.Left,Width=245,TextAlign=ContentAlignment.MiddleLeft});
+        var noticeDuration=new NumericUpDown{Dock=DockStyle.Right,Width=90,Minimum=.5m,Maximum=5m,Increment=.5m,DecimalPlaces=1,Value=(decimal)AppPreferences.NoticeDuration(uiPreferences.ErrorNoticeSeconds),AccessibleName=UiLanguage.T("Display duration (seconds)")};
+        noticeDuration.ValueChanged+=(_,_)=>{uiPreferences.ErrorNoticeSeconds=(double)noticeDuration.Value;SavePreferences();};noticeRow.Controls.Add(noticeDuration);body.Controls.Add(noticeRow);Separator();
         Toggle("Remind me about updates on startup",uiPreferences.RemindUpdates,v=>uiPreferences.RemindUpdates=v);
         body.Controls.Add(new Label{Text="TLC+ checks GitHub at launch and reminds you once if a newer version is available.",Width=328,Height=34,Margin=new(20,0,0,0),Font=new("Segoe UI",8)});
         var details=new LinkLabel{Text="Details",Width=328,Height=19,Margin=new(20,0,0,2),LinkColor=UiTheme.Header,Font=new("Segoe UI",8)};var detailBody=new Label{Text="When ON, TLC+ checks GitHub a few seconds after launch and shows a reminder if a newer version is available. When OFF, you must use the Update menu entry manually. No popup is shown when you are already up to date.",Width=328,Height=49,Margin=new(20,0,0,0),Font=new("Segoe UI",8),Visible=false};details.LinkClicked+=(_,_)=>{detailBody.Visible=!detailBody.Visible;details.Text=UiLanguage.T(detailBody.Visible?"Hide details":"Details");};body.Controls.Add(details);body.Controls.Add(detailBody);
@@ -85,7 +91,7 @@ public partial class MainForm
                 if(MessageBox.Show(this,string.Format(UiLanguage.T("Version {0} is available. Open its download page?"),update.Tag),UiLanguage.T("Check for Updates"),MessageBoxButtons.YesNo,MessageBoxIcon.Information)==DialogResult.Yes)
                     System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(update.Url!){UseShellExecute=true});
             }else if(manual)MessageBox.Show(this,UiLanguage.T(update.Message),UiLanguage.T("Check for Updates"),MessageBoxButtons.OK,MessageBoxIcon.Information);
-        }catch(Exception e)when(e is HttpRequestException or TaskCanceledException or JsonException or IOException){if(manual)MessageBox.Show(this,UiLanguage.T("Could not check for updates.")+"\n"+e.Message,UiLanguage.T("Check for Updates"));}
+        }catch(Exception e)when(e is HttpRequestException or TaskCanceledException or JsonException or IOException){if(manual)MessageBox.Show(this,UiLanguage.T("Could not check for updates.")+"\n"+e.Message,UiLanguage.T("Check for Updates"),MessageBoxButtons.OK,MessageBoxIcon.Error);}
         finally{checkingUpdates=false;}
     }
     sealed class PreferencesMenuRenderer:ToolStripProfessionalRenderer

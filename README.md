@@ -1,16 +1,16 @@
 # TLC+ C#
 
-Track Layout Creator Plus for Windows, ported from TLC+ Python 1.3.0. Current version: **1.0.1**.
+Track Layout Creator Plus for Windows, ported from TLC+ Python 1.3.0. Current version: **1.0.2**.
 
 Create and edit GT6 track layouts, adjust elevation and banking, place scenery decorations and export TED files. Python and a separate .NET installation are not needed to run the portable Windows build.
 
 ## Run
 
-1. Download [the complete portable ZIP](https://github.com/daydrive7/track-layout-creator-plus-csharp/releases/download/v1.0.1/TLCPlus-CSharp-v1.0.1-win-x64.zip).
+1. Download [the complete portable ZIP](https://github.com/daydrive7/track-layout-creator-plus-csharp/releases/download/v1.0.2/TLCPlus-CSharp-v1.0.2-win-x64.zip).
 2. Extract the whole folder to a writable location.
 3. Open `TLCPlus.exe`. Keep the `Assets` folder beside it.
 
-Windows x64 is supported. Preferences are saved in `config.json` beside the program. If you download the separate EXE instead, also extract `TLCPlus-CSharp-v1.0.1-assets.zip` beside it. Downloads, checksums and release notes are on the [Releases page](https://github.com/daydrive7/track-layout-creator-plus-csharp/releases).
+Windows x64 is supported. Preferences are saved in `config.json` beside the program. If you download the separate EXE instead, also extract `TLCPlus-CSharp-v1.0.2-assets.zip` beside it. Downloads, checksums and release notes are on the [Releases page](https://github.com/daydrive7/track-layout-creator-plus-csharp/releases).
 
 ## Getting started
 
@@ -27,6 +27,7 @@ Use the elevation graph to inspect height and slope, and the isometric preview t
 - Dark/light themes, accent colors and custom panel/canvas colors.
 - Nine languages under **File → Language**. Untranslated source strings fall back to English.
 - Separate isometric preview and PNG/SVG/CSV export.
+- Error notices above the canvas, with a smooth fade and a configurable 0.5–5 second duration (3.5 seconds by default) under **File → Preferences → Error Notices**.
 
 ## Road types
 
@@ -76,7 +77,7 @@ Install the .NET 10 SDK on Windows, then run these commands from the repository 
 .\verify.ps1
 ```
 
-The portable build is written to `release/TLCPlus-CSharp-v1.0.1/`. Open its `TLCPlus.exe`, or use `Start TLC+.cmd` from the repository root. Verification runs the format fixtures and desktop checks, with reports and preview images written to `analysis/`.
+The portable build is written to `release/TLCPlus-CSharp-v1.0.2/`. Open its `TLCPlus.exe`, or use `Start TLC+.cmd` from the repository root. Verification runs the format fixtures and desktop checks, with reports and preview images written to `analysis/`.
 
 | Directory | Contents |
 | --- | --- |

@@ -17,7 +17,7 @@ public partial class MainForm
     [DllImport("user32.dll")]static extern IntPtr SendMessage(IntPtr h,int m,IntPtr w,IntPtr l);
     void BuildPythonInterface(string? path)
     {
-        Text="TLC+ C# 1.0.1 (Python 1.3.0 port)";Width=1500;Height=940;MinimumSize=new(900,620);StartPosition=FormStartPosition.CenterScreen;BackColor=Bg;ForeColor=TextColor;Font=new("Segoe UI",9);KeyPreview=true;FormBorderStyle=FormBorderStyle.None;Padding=new(1);MaximizedBounds=Screen.FromControl(this).WorkingArea;
+        Text="TLC+ C# 1.0.2 (Python 1.3.0 port)";Width=1500;Height=940;MinimumSize=new(900,620);StartPosition=FormStartPosition.CenterScreen;BackColor=Bg;ForeColor=TextColor;Font=new("Segoe UI",9);KeyPreview=true;FormBorderStyle=FormBorderStyle.None;Padding=new(1);MaximizedBounds=Screen.FromControl(this).WorkingArea;
         string icon=Path.Combine(Terrain.AssetsPath,"icons/windowicon.ico");if(File.Exists(icon))Icon=new Icon(icon);
         var chrome=new Panel{Dock=DockStyle.Top,Height=34,BackColor=Color.FromArgb(1,16,31)};
         var brand=new Label{Text="TLC+",Dock=DockStyle.Left,Width=56,TextAlign=ContentAlignment.MiddleCenter,Font=new("Segoe UI",9,FontStyle.Bold),ForeColor=Accent};

@@ -57,9 +57,14 @@ public static class UiLanguage
 public static class LocalizedMessageBox
 {
     public static DialogResult Show(string text,string caption="TLC+",MessageBoxButtons buttons=MessageBoxButtons.OK,MessageBoxIcon icon=MessageBoxIcon.None)
-        =>System.Windows.Forms.MessageBox.Show(UiLanguage.T(text),UiLanguage.T(caption),buttons,icon);
+        =>ShowCore(null,text,caption,buttons,icon);
     public static DialogResult Show(IWin32Window owner,string text,string caption="TLC+",MessageBoxButtons buttons=MessageBoxButtons.OK,MessageBoxIcon icon=MessageBoxIcon.None)
-        =>System.Windows.Forms.MessageBox.Show(owner,UiLanguage.T(text),UiLanguage.T(caption),buttons,icon);
+        =>ShowCore(owner,text,caption,buttons,icon);
+    static DialogResult ShowCore(IWin32Window? owner,string text,string caption,MessageBoxButtons buttons,MessageBoxIcon icon)
+    {
+        if(buttons==MessageBoxButtons.OK&&icon is MessageBoxIcon.Error or MessageBoxIcon.Warning&&MainForm.RouteError(owner,text,caption))return DialogResult.OK;
+        return owner==null?System.Windows.Forms.MessageBox.Show(UiLanguage.T(text),UiLanguage.T(caption),buttons,icon):System.Windows.Forms.MessageBox.Show(owner,UiLanguage.T(text),UiLanguage.T(caption),buttons,icon);
+    }
 }
 public partial class MainForm
 {

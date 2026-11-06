@@ -1,13 +1,13 @@
-# TLC+ C# v1.0.1
+# TLC+ C# v1.0.2
 
-Adds experimental click-to-place **Road Types**, including Andalusia restaurant/parking roads, plus scenery-specific complete road chains. Find it in Geometry, select a type and click the track. Right-click removes a span. Undo/redo and companion metadata retain placements.
+Errors now appear as custom notices at the top of the canvas instead of blocking error popups.
 
-- 26 audited recipes / 33 scenery choices; full entrance–middle–exit chains.
-- Protects start/finish, rejects overlaps and invalid scenery/flags/bounds.
-- Exact single-section editing for existing TEDs, preserving unrelated bytes.
-- Corrected restaurant nominal length (150 m), narrow middle lengths and swapped scenery headings in the external reference.
-- Existing exports without road placements remain byte-identical to the Python fixtures.
+- Smooth fade, fully dismissed after **3.5 seconds** by default.
+- Choose **0.5–5 seconds** in **File → Preferences → Error Notices**; the setting is saved automatically.
+- Notices keep keyboard focus and let clicks pass through to the canvas. Repeated errors replace the current notice and restart its timer.
+- Notices follow window movement and resizing, use the current theme, and include translated preferences in all nine interface languages.
+- Retained verification reports and corrected the intermittent road-placement check's pixel-boundary selection.
 
-**Experimental game behavior:** file structure and UUID insertion are tested; GT6 appearance and drivability still need in-game validation. This update targets C# and Web. Python is unchanged.
+TRK5/TED compatibility and road-type handling are unchanged. Python and Web are unchanged by this C# update.
 
 Download the complete win-x64 ZIP and extract all files. Keep Assets beside TLCPlus.exe. The separate EXE download requires the assets ZIP. Source and SHA256 checksums are provided. MIT licensed.

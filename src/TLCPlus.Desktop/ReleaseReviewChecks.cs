@@ -20,10 +20,10 @@ static class ReleaseReviewChecks
         if(!MainForm.CombinedCredits().Contains("eran0004")||!MainForm.CombinedCredits().Contains("daydrive7")||MainForm.CombinedCredits().Contains("CREDITS_TEXT"))throw new Exception("Combined credits omit Python acknowledgments");
         checks.Add("Empty update-menu area is draggable; centered title removed; combined Python/C# credits retain original acknowledgments");
         string Json(string version)=>"{\"tag_name\":\""+version+"\",\"html_url\":\"https://github.com/"+ReleaseUpdates.Repository+"/releases/tag/"+version+"\"}";
-        if(!ReleaseUpdates.Parse(Json("v1.0.2")).Newer||ReleaseUpdates.Parse(Json("v"+ReleaseUpdates.Version)).Newer||ReleaseUpdates.Parse(Json("v0.9.0")).Newer)throw new Exception("Native release comparison failed");
+        if(!ReleaseUpdates.Parse(Json("v1.0.3")).Newer||ReleaseUpdates.Parse(Json("v"+ReleaseUpdates.Version)).Newer||ReleaseUpdates.Parse(Json("v0.9.0")).Newer)throw new Exception("Native release comparison failed");
         using(var client=new HttpClient(new Stub(HttpStatusCode.NotFound,""))){if(ReleaseUpdates.Check(client).GetAwaiter().GetResult().Message!="No public C# release is available yet.")throw new Exception("Missing releases are incorrectly reported as up to date");}
         using(var client=new HttpClient(new Stub(HttpStatusCode.OK,Json("v1.2.0")))){if(!ReleaseUpdates.Check(client).GetAwaiter().GetResult().Newer)throw new Exception("C# release endpoint did not work");}
-        checks.Add("C# 1.0.0 updater: correct repository, newer/equal/older versions and no-public-release response");
+        checks.Add("C# updater: correct repository, newer/equal/older versions and no-public-release response");
         var preferences=(AppPreferences)typeof(MainForm).GetField("uiPreferences",Private)!.GetValue(form)!;
         var original=(preferences.Theme,preferences.Accent,preferences.CanvasColor,preferences.PanelColor,preferences.ShowTitle);int scene=form.Project.Settings.Scenery;
         try{
