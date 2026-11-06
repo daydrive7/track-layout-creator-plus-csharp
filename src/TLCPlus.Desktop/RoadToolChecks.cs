@@ -9,10 +9,18 @@ static class RoadToolChecks
         form.Project.RoadPlacements.Clear();form.Project.Settings.Scenery=3;form.Commit();form.Canvas.Fit();
         var choice=(ComboBox)typeof(MainForm).GetField("roadTypeChoice",Private)!.GetValue(form)!;
         var type=choice.Items.Cast<RoadType>().First(t=>t.Id is "andalusia-parking" or "andalusia-restaurant");choice.SelectedItem=type;
-        double distance=-1;for(double d=type.TotalLength/2;d<form.Preview!.PlanLength-type.TotalLength/2;d+=50){var copy=form.Project.Copy();copy.RoadPlacements.Add(new(){TypeId=type.Id,Scenery=3,Start=d-type.TotalLength/2});try{_ = Exporter.Build(copy);distance=d;break;}catch(InvalidDataException){}}
-        if(distance<0)throw new Exception("No ordinary road span available for the placement test");
         form.Canvas.Tool="road";using(var image=form.Canvas.Render()){}
-        var location=Point.Round(form.Canvas.Screen(Geometry.At(form.Preview.Points,distance).Point));
+        var nearestTrack=typeof(TrackCanvas).GetMethod("NearestTrack",Private)!;
+        double distance=-1;Point location=default;
+        for(double d=type.TotalLength/2;d<form.Preview!.PlanLength-type.TotalLength/2;d+=50){
+            var pixel=Point.Round(form.Canvas.Screen(Geometry.At(form.Preview.Points,d).Point));
+            var picked=((double Distance,double Pixels))nearestTrack.Invoke(form.Canvas,[pixel])!;
+            if(picked.Pixels>35)continue;
+            // Validate the actual pixel hit: rounding can move a boundary click into protected road.
+            var copy=form.Project.Copy();copy.RoadPlacements.Add(new(){TypeId=type.Id,Scenery=3,Start=picked.Distance-type.TotalLength/2});
+            try{_ = Exporter.Build(copy);distance=picked.Distance;location=pixel;break;}catch(InvalidDataException){}
+        }
+        if(distance<0)throw new Exception("No ordinary road span available for the placement test");
         var down=typeof(TrackCanvas).GetMethod("OnMouseDown",Private)!;
         down.Invoke(form.Canvas,[new MouseEventArgs(MouseButtons.Left,1,location.X,location.Y,0)]);
         if(form.Project.RoadPlacements.Count!=1||!form.Preview!.Roads.Any(r=>r.Uuid==0xB4CB0024E8474511UL))throw new Exception("Canvas road click did not insert a restaurant span");
