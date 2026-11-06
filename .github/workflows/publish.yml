@@ -41,7 +41,8 @@ jobs:
           if ! gh release view "v$VERSION" >/dev/null 2>&1; then
             gh release create "v$VERSION" --draft --target "$SOURCE_SHA" --title "TLC+ C# v$VERSION" --notes-file RELEASE_NOTES.md
           fi
-          gh api "repos/$GH_REPO/releases/tags/v$VERSION" > release.json
+          RELEASE_ID=$(gh release view "v$VERSION" --json databaseId --jq .databaseId)
+          gh api "repos/$GH_REPO/releases/$RELEASE_ID" > release.json
           test "$(jq -r .draft release.json)" = true
           test "$(jq -r .target_commitish release.json)" = "$SOURCE_SHA"
           gh api "repos/$GH_REPO/zipball/$SOURCE_SHA" > source.zip
@@ -70,7 +71,8 @@ jobs:
         run: |
           set -euo pipefail
           gh release upload "v$VERSION" assets/* --clobber
-          gh api "repos/$GH_REPO/releases/tags/v$VERSION" > remote.json
+          RELEASE_ID=$(gh release view "v$VERSION" --json databaseId --jq .databaseId)
+          gh api "repos/$GH_REPO/releases/$RELEASE_ID" > remote.json
           python - <<'PY'
           import json,hashlib
           from pathlib import Path
